@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "tamasfe.even-better-toml",
+    "ms-python.vscode-pylance",
+    "pamaron.pytest-runner",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "charliermarsh.ruff",
+    "tekumara.typos-vscode",
+
+  ],
+  "unwantedRecommendations": [  ],
+}

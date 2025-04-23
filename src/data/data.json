@@ -1,0 +1,1317 @@
+{
+  "apple": {
+    "devices": [
+      {
+        "actualResolution": [2064, 2752],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "13",
+        "logicalResolution": [1032, 1376],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 1,
+        "model": "Pro 13",
+        "kind": "iPad",
+        "name": "iPad Pro 13 (gen 1)"
+      },
+      {
+        "actualResolution": [2048, 2732],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "12.9",
+        "logicalResolution": [1024, 1366],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 1,
+        "kind": "iPad",
+        "model": "Pro 12.9",
+        "name": "iPad Pro 12.9 (gen 1)",
+        "identicalTo": [
+          "iPad Pro 12.9 (gen 2)",
+          "iPad Pro 12.9 (gen 3)",
+          "iPad Pro 12.9 (gen 4)",
+          "iPad Pro 12.9 (gen 5)",
+          "iPad Pro 12.9 (gen 6)"
+        ]
+      },
+      {
+        "actualResolution": [2048, 2732],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "12.9",
+        "logicalResolution": [1024, 1366],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 2,
+        "kind": "iPad",
+        "model": "Pro 12.9",
+        "name": "iPad Pro 12.9 (gen 2)",
+        "identicalTo": [
+          "iPad Pro 12.9 (gen 1)",
+          "iPad Pro 12.9 (gen 3)",
+          "iPad Pro 12.9 (gen 4)",
+          "iPad Pro 12.9 (gen 5)",
+          "iPad Pro 12.9 (gen 6)"
+        ]
+      },
+      {
+        "actualResolution": [2048, 2732],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "12.9",
+        "logicalResolution": [1024, 1366],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 3,
+        "kind": "iPad",
+        "model": "Pro 12.9",
+        "name": "iPad Pro 12.9 (gen 3)",
+        "identicalTo": [
+          "iPad Pro 12.9 (gen 1)",
+          "iPad Pro 12.9 (gen 2)",
+          "iPad Pro 12.9 (gen 4)",
+          "iPad Pro 12.9 (gen 5)",
+          "iPad Pro 12.9 (gen 6)"
+        ]
+      },
+      {
+        "actualResolution": [2048, 2732],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "12.9",
+        "logicalResolution": [1024, 1366],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 4,
+        "kind": "iPad",
+        "model": "Pro 12.9",
+        "name": "iPad Pro 12.9 (gen 4)",
+        "identicalTo": [
+          "iPad Pro 12.9 (gen 1)",
+          "iPad Pro 12.9 (gen 2)",
+          "iPad Pro 12.9 (gen 3)",
+          "iPad Pro 12.9 (gen 5)",
+          "iPad Pro 12.9 (gen 6)"
+        ]
+      },
+      {
+        "actualResolution": [2048, 2732],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "12.9",
+        "logicalResolution": [1024, 1366],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 5,
+        "kind": "iPad",
+        "model": "Pro 12.9",
+        "name": "iPad Pro 12.9 (gen 5)",
+        "identicalTo": [
+          "iPad Pro 12.9 (gen 1)",
+          "iPad Pro 12.9 (gen 2)",
+          "iPad Pro 12.9 (gen 3)",
+          "iPad Pro 12.9 (gen 4)",
+          "iPad Pro 12.9 (gen 6)"
+        ]
+      },
+      {
+        "actualResolution": [2048, 2732],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "12.9",
+        "logicalResolution": [1024, 1366],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 6,
+        "kind": "iPad",
+        "model": "Pro 12.9",
+        "name": "iPad Pro 12.9 (gen 6)",
+        "identicalTo": [
+          "iPad Pro 12.9 (gen 1)",
+          "iPad Pro 12.9 (gen 2)",
+          "iPad Pro 12.9 (gen 3)",
+          "iPad Pro 12.9 (gen 4)",
+          "iPad Pro 12.9 (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2388],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "11",
+        "logicalResolution": [834, 1194],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 1,
+        "kind": "iPad",
+        "model": "Pro 11",
+        "name": "iPad Pro 11 (gen 1)",
+        "identicalTo": [
+          "iPad Pro 11 (gen 2)",
+          "iPad Pro 11 (gen 3)",
+          "iPad Pro 11 (gen 4)",
+          "iPad Pro 11 (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2388],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "11",
+        "logicalResolution": [834, 1194],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 2,
+        "kind": "iPad",
+        "model": "Pro 11",
+        "name": "iPad Pro 11 (gen 2)",
+        "identicalTo": [
+          "iPad Pro 11 (gen 1)",
+          "iPad Pro 11 (gen 3)",
+          "iPad Pro 11 (gen 4)",
+          "iPad Pro 11 (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2388],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "11",
+        "logicalResolution": [834, 1194],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 3,
+        "kind": "iPad",
+        "model": "Pro 11",
+        "name": "iPad Pro 11 (gen 3)",
+        "identicalTo": [
+          "iPad Pro 11 (gen 1)",
+          "iPad Pro 11 (gen 2)",
+          "iPad Pro 11 (gen 4)",
+          "iPad Pro 11 (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2388],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "11",
+        "logicalResolution": [834, 1194],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 4,
+        "kind": "iPad",
+        "model": "Pro 11",
+        "name": "iPad Pro 11 (gen 4)",
+        "identicalTo": [
+          "iPad Pro 11 (gen 1)",
+          "iPad Pro 11 (gen 2)",
+          "iPad Pro 11 (gen 3)",
+          "iPad Pro 11 (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2388],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "11",
+        "logicalResolution": [834, 1194],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 5,
+        "kind": "iPad",
+        "model": "Pro 11",
+        "name": "iPad Pro 11 (gen 5)",
+        "identicalTo": [
+          "iPad Pro 11 (gen 1)",
+          "iPad Pro 11 (gen 2)",
+          "iPad Pro 11 (gen 3)",
+          "iPad Pro 11 (gen 4)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2420],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "11",
+        "logicalResolution": [834, 1210],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 6,
+        "model": "Pro 11",
+        "kind": "iPad",
+        "name": "iPad Pro 11 (gen 6)"
+      },
+      {
+        "actualResolution": [1640, 2360],
+        "aspectRatio": "16 : 23",
+        "diagonalSize": "10.9",
+        "logicalResolution": [810, 1080],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 10,
+        "model": "iPad",
+        "kind": "iPad",
+        "name": "iPad (gen 10)"
+      },
+      {
+        "actualResolution": [1640, 2360],
+        "aspectRatio": "16 : 23",
+        "diagonalSize": "10.9",
+        "logicalResolution": [820, 1180],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 4,
+        "kind": "iPad",
+        "model": "Air",
+        "name": "iPad Air (gen 4)",
+        "identicalTo": ["iPad Air (gen 5)"]
+      },
+      {
+        "actualResolution": [1640, 2360],
+        "aspectRatio": "16 : 23",
+        "diagonalSize": "10.9",
+        "logicalResolution": [820, 1180],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 5,
+        "kind": "iPad",
+        "model": "Air",
+        "name": "iPad Air (gen 5)",
+        "identicalTo": ["iPad Air (gen 4)"]
+      },
+      {
+        "actualResolution": [1620, 2160],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "10.2",
+        "logicalResolution": [810, 1080],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "iPad",
+        "kind": "iPad",
+        "name": "iPad"
+      },
+      {
+        "actualResolution": [1488, 2266],
+        "aspectRatio": "2 : 3",
+        "diagonalSize": "8.3",
+        "logicalResolution": [744, 1133],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 6,
+        "kind": "iPad",
+        "model": "Mini",
+        "name": "iPad Mini (gen 6)",
+        "identicalTo": ["iPad Mini (gen 7)"]
+      },
+      {
+        "actualResolution": [1488, 2266],
+        "aspectRatio": "2 : 3",
+        "diagonalSize": "8.3",
+        "logicalResolution": [744, 1133],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 7,
+        "kind": "iPad",
+        "model": "Mini",
+        "name": "iPad Mini (gen 7)",
+        "identicalTo": ["iPad Mini (gen 6)"]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "7.9",
+        "logicalResolution": [768, 1024],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 2,
+        "kind": "iPad",
+        "model": "Mini",
+        "name": "iPad Mini (gen 2)",
+        "identicalTo": [
+          "iPad Mini (gen 3)",
+          "iPad Mini (gen 4)",
+          "iPad Mini (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "7.9",
+        "logicalResolution": [768, 1024],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 3,
+        "kind": "iPad",
+        "model": "Mini",
+        "name": "iPad Mini (gen 3)",
+        "identicalTo": [
+          "iPad Mini (gen 2)",
+          "iPad Mini (gen 4)",
+          "iPad Mini (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "7.9",
+        "logicalResolution": [768, 1024],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 4,
+        "kind": "iPad",
+        "model": "Mini",
+        "name": "iPad Mini (gen 4)",
+        "identicalTo": [
+          "iPad Mini (gen 2)",
+          "iPad Mini (gen 3)",
+          "iPad Mini (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "7.9",
+        "logicalResolution": [768, 1024],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 5,
+        "kind": "iPad",
+        "model": "Mini",
+        "name": "iPad Mini (gen 5)",
+        "identicalTo": [
+          "iPad Mini (gen 2)",
+          "iPad Mini (gen 3)",
+          "iPad Mini (gen 4)"
+        ]
+      },
+      {
+        "actualResolution": [1668, 2224],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "10.5",
+        "logicalResolution": [834, 1112],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 3,
+        "model": "Air",
+        "kind": "iPad",
+        "name": "iPad Air (gen 3)"
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 3,
+        "kind": "iPad",
+        "model": "iPad",
+        "name": "iPad (gen 3)",
+        "identicalTo": [
+          "iPad (gen 4)",
+          "iPad (gen 5)",
+          "iPad (gen 6)",
+          "iPad Air (gen 1)",
+          "iPad Air (gen 2)",
+          "iPad Pro 9.7"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 4,
+        "kind": "iPad",
+        "model": "iPad",
+        "name": "iPad (gen 4)",
+        "identicalTo": [
+          "iPad (gen 3)",
+          "iPad (gen 5)",
+          "iPad (gen 6)",
+          "iPad Air (gen 1)",
+          "iPad Air (gen 2)",
+          "iPad Pro 9.7"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 5,
+        "kind": "iPad",
+        "model": "iPad",
+        "name": "iPad (gen 5)",
+        "identicalTo": [
+          "iPad (gen 3)",
+          "iPad (gen 4)",
+          "iPad (gen 6)",
+          "iPad Air (gen 1)",
+          "iPad Air (gen 2)",
+          "iPad Pro 9.7"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 6,
+        "kind": "iPad",
+        "model": "iPad",
+        "name": "iPad (gen 6)",
+        "identicalTo": [
+          "iPad (gen 3)",
+          "iPad (gen 4)",
+          "iPad (gen 5)",
+          "iPad Air (gen 1)",
+          "iPad Air (gen 2)",
+          "iPad Pro 9.7"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 1,
+        "kind": "iPad",
+        "model": "Air",
+        "name": "iPad Air (gen 1)",
+        "identicalTo": [
+          "iPad (gen 3)",
+          "iPad (gen 4)",
+          "iPad (gen 5)",
+          "iPad (gen 6)",
+          "iPad Air (gen 2)",
+          "iPad Pro 9.7"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": 2,
+        "kind": "iPad",
+        "model": "Air",
+        "name": "iPad Air (gen 2)",
+        "identicalTo": [
+          "iPad (gen 3)",
+          "iPad (gen 4)",
+          "iPad (gen 5)",
+          "iPad (gen 6)",
+          "iPad Air (gen 1)",
+          "iPad Pro 9.7"
+        ]
+      },
+      {
+        "actualResolution": [1536, 2048],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 264,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "Pro 9.7",
+        "kind": "iPad",
+        "name": "iPad Pro 9.7",
+        "identicalTo": [
+          "iPad (gen 3)",
+          "iPad (gen 4)",
+          "iPad (gen 5)",
+          "iPad (gen 6)",
+          "iPad Air (gen 1)",
+          "iPad Air (gen 2)"
+        ]
+      },
+      {
+        "actualResolution": [768, 1024],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "7.9",
+        "logicalResolution": [768, 1024],
+        "ppi": 163,
+        "scaleFactor": 1,
+        "generation": 1,
+        "model": "Mini",
+        "kind": "iPad",
+        "name": "iPad Mini (gen 1)"
+      },
+      {
+        "actualResolution": [768, 1024],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 132,
+        "scaleFactor": 1,
+        "generation": 1,
+        "kind": "iPad",
+        "model": "iPad",
+        "name": "iPad (gen 1)",
+        "identicalTo": ["iPad (gen 2)"]
+      },
+      {
+        "actualResolution": [768, 1024],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "9.7",
+        "logicalResolution": [768, 1024],
+        "ppi": 132,
+        "scaleFactor": 1,
+        "generation": 2,
+        "kind": "iPad",
+        "model": "iPad",
+        "name": "iPad (gen 2)",
+        "identicalTo": ["iPad (gen 1)"]
+      },
+      {
+        "actualResolution": [2868, 1320],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.9",
+        "logicalResolution": [440, 956],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "16 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 16 Pro Max"
+      },
+      {
+        "actualResolution": [2622, 1206],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.3",
+        "logicalResolution": [440, 956],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "16 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 16 Pro"
+      },
+      {
+        "actualResolution": [2796, 1290],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.7",
+        "logicalResolution": [430, 932],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "15 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 15 Pro Max"
+      },
+      {
+        "actualResolution": [1179, 2556],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [393, 852],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "15 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 15 Pro",
+        "identicalTo": ["iPhone 15", "iPhone 16", "iPhone 14 Pro"]
+      },
+      {
+        "actualResolution": [1284, 2778],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.7",
+        "logicalResolution": [428, 926],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "14 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 14 Plus"
+      },
+      {
+        "actualResolution": [1170, 2532],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [390, 844],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "14",
+        "kind": "iPhone",
+        "name": "iPhone 14",
+        "identicalTo": [
+          "iPhone 13",
+          "iPhone 13 Pro",
+          "iPhone 12",
+          "iPhone 12 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1080, 2340],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "5.4",
+        "logicalResolution": [375, 812],
+        "ppi": 476,
+        "scaleFactor": "2.88",
+        "generation": null,
+        "model": "13 mini",
+        "kind": "iPhone",
+        "name": "iPhone 13 mini",
+        "identicalTo": ["iPhone 12 mini"]
+      },
+      {
+        "actualResolution": [1080, 2340],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "5.4",
+        "logicalResolution": [375, 812],
+        "ppi": 476,
+        "scaleFactor": "2.88",
+        "generation": null,
+        "model": "12 mini",
+        "kind": "iPhone",
+        "name": "iPhone 12 mini",
+        "identicalTo": ["iPhone 13 mini"]
+      },
+      {
+        "actualResolution": [1242, 2688],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.5",
+        "logicalResolution": [414, 896],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "11 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 11 Pro Max"
+      },
+      {
+        "actualResolution": [1125, 2436],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "5.8",
+        "logicalResolution": [375, 812],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "11 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 11 Pro",
+        "identicalTo": ["iPhone XS", "iPhone X"]
+      },
+      {
+        "actualResolution": [828, 1792],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [414, 896],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "11",
+        "kind": "iPhone",
+        "name": "iPhone 11"
+      },
+      {
+        "actualResolution": [1080, 1920],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "5.5",
+        "logicalResolution": [414, 736],
+        "ppi": 401,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "8 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 8 Plus"
+      },
+      {
+        "actualResolution": [750, 1334],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4.7",
+        "logicalResolution": [375, 667],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 3,
+        "model": "SE",
+        "kind": "iPhone",
+        "name": "iPhone SE (gen 3)",
+        "identicalTo": [
+          "iPhone SE (gen 2)",
+          "iPhone 8",
+          "iPhone 7",
+          "iPhone 6s"
+        ]
+      },
+      {
+        "actualResolution": [750, 1334],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4.7",
+        "logicalResolution": [375, 667],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 2,
+        "model": "SE",
+        "kind": "iPhone",
+        "name": "iPhone SE (gen 2)",
+        "identicalTo": [
+          "iPhone SE (gen 3)",
+          "iPhone 8",
+          "iPhone 7",
+          "iPhone 6s"
+        ]
+      },
+      {
+        "actualResolution": [1320, 2868],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.9",
+        "logicalResolution": [440, 956],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "16 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 16 Pro Max"
+      },
+      {
+        "actualResolution": [1179, 2556],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [393, 852],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "15 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 15 Pro",
+        "identicalTo": [
+          "iPhone 15 Pro",
+          "iPhone 15",
+          "iPhone 16",
+          "iPhone 14 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1179, 2556],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [393, 852],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "15",
+        "kind": "iPhone",
+        "name": "iPhone 15",
+        "identicalTo": [
+          "iPhone 15 Pro",
+          "iPhone 15 Pro",
+          "iPhone 16",
+          "iPhone 14 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1179, 2556],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [393, 852],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "16",
+        "kind": "iPhone",
+        "name": "iPhone 16",
+        "identicalTo": [
+          "iPhone 15 Pro",
+          "iPhone 15 Pro",
+          "iPhone 15",
+          "iPhone 14 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1179, 2556],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [393, 852],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "14 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 14 Pro",
+        "identicalTo": [
+          "iPhone 15 Pro",
+          "iPhone 15 Pro",
+          "iPhone 15",
+          "iPhone 16"
+        ]
+      },
+      {
+        "actualResolution": [1290, 2796],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.7",
+        "logicalResolution": [430, 932],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "15 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 15 Pro Max",
+        "identicalTo": ["iPhone 15 Plus", "iPhone 16 Plus", "iPhone 14 Pro Max"]
+      },
+      {
+        "actualResolution": [1290, 2796],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.7",
+        "logicalResolution": [430, 932],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "15 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 15 Plus",
+        "identicalTo": [
+          "iPhone 15 Pro Max",
+          "iPhone 16 Plus",
+          "iPhone 14 Pro Max"
+        ]
+      },
+      {
+        "actualResolution": [1290, 2796],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.7",
+        "logicalResolution": [430, 932],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "16 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 16 Plus",
+        "identicalTo": [
+          "iPhone 15 Pro Max",
+          "iPhone 15 Plus",
+          "iPhone 14 Pro Max"
+        ]
+      },
+      {
+        "actualResolution": [1290, 2796],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.7",
+        "logicalResolution": [430, 932],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "14 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 14 Pro Max",
+        "identicalTo": ["iPhone 15 Pro Max", "iPhone 15 Plus", "iPhone 16 Plus"]
+      },
+      {
+        "actualResolution": [1284, 2778],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [428, 926],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "14 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 14 Plus",
+        "identicalTo": ["iPhone 13 Pro Max", "iPhone 12 Pro Max"]
+      },
+      {
+        "actualResolution": [1284, 2778],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [428, 926],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "13 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 13 Pro Max",
+        "identicalTo": ["iPhone 14 Plus", "iPhone 12 Pro Max"]
+      },
+      {
+        "actualResolution": [1284, 2778],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [428, 926],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "12 Pro Max",
+        "kind": "iPhone",
+        "name": "iPhone 12 Pro Max",
+        "identicalTo": ["iPhone 14 Plus", "iPhone 13 Pro Max"]
+      },
+      {
+        "actualResolution": [1170, 2532],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [390, 844],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "14",
+        "kind": "iPhone",
+        "name": "iPhone 14",
+        "identicalTo": [
+          "iPhone 14",
+          "iPhone 13",
+          "iPhone 13 Pro",
+          "iPhone 12",
+          "iPhone 12 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1170, 2532],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [390, 844],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "13",
+        "kind": "iPhone",
+        "name": "iPhone 13",
+        "identicalTo": [
+          "iPhone 14",
+          "iPhone 14",
+          "iPhone 13 Pro",
+          "iPhone 12",
+          "iPhone 12 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1170, 2532],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [390, 844],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "13 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 13 Pro",
+        "identicalTo": [
+          "iPhone 14",
+          "iPhone 14",
+          "iPhone 13",
+          "iPhone 12",
+          "iPhone 12 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1170, 2532],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [390, 844],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "12",
+        "kind": "iPhone",
+        "name": "iPhone 12",
+        "identicalTo": [
+          "iPhone 14",
+          "iPhone 14",
+          "iPhone 13",
+          "iPhone 13 Pro",
+          "iPhone 12 Pro"
+        ]
+      },
+      {
+        "actualResolution": [1170, 2532],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "6.1",
+        "logicalResolution": [390, 844],
+        "ppi": 460,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "12 Pro",
+        "kind": "iPhone",
+        "name": "iPhone 12 Pro",
+        "identicalTo": [
+          "iPhone 14",
+          "iPhone 14",
+          "iPhone 13",
+          "iPhone 13 Pro",
+          "iPhone 12"
+        ]
+      },
+      {
+        "actualResolution": [640, 1136],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4",
+        "logicalResolution": [320, 568],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "SE",
+        "kind": "iPhone",
+        "name": "iPhone SE (gen 1)",
+        "identicalTo": [
+          "iPod Touch (gen 7)",
+          "iPod Touch (gen 6)",
+          "iPod Touch (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [750, 1334],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4.7",
+        "logicalResolution": [375, 667],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "8",
+        "kind": "iPhone",
+        "name": "iPhone 8",
+        "identicalTo": [
+          "iPhone SE (gen 3)",
+          "iPhone SE (gen 2)",
+          "iPhone 7",
+          "iPhone 6s"
+        ]
+      },
+      {
+        "actualResolution": [750, 1334],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4.7",
+        "logicalResolution": [375, 667],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "7",
+        "kind": "iPhone",
+        "name": "iPhone 7",
+        "identicalTo": [
+          "iPhone SE (gen 3)",
+          "iPhone SE (gen 2)",
+          "iPhone 8",
+          "iPhone 6s"
+        ]
+      },
+      {
+        "actualResolution": [750, 1334],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4.7",
+        "logicalResolution": [375, 667],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "6s",
+        "kind": "iPhone",
+        "name": "iPhone 6s",
+        "identicalTo": [
+          "iPhone SE (gen 3)",
+          "iPhone SE (gen 2)",
+          "iPhone 8",
+          "iPhone 7"
+        ]
+      },
+      {
+        "actualResolution": [828, 1792],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "6.1",
+        "logicalResolution": [414, 896],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": null,
+        "model": "XR",
+        "kind": "iPhone",
+        "name": "iPhone XR"
+      },
+      {
+        "actualResolution": [1125, 2436],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "5.8",
+        "logicalResolution": [375, 812],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "XS",
+        "kind": "iPhone",
+        "name": "iPhone XS",
+        "identicalTo": ["iPhone 11 Pro", "iPhone X"]
+      },
+      {
+        "actualResolution": [1125, 2436],
+        "aspectRatio": "9 : 19.5",
+        "diagonalSize": "5.8",
+        "logicalResolution": [375, 812],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "X",
+        "kind": "iPhone",
+        "name": "iPhone X",
+        "identicalTo": ["iPhone 11 Pro", "iPhone XS"]
+      },
+      {
+        "actualResolution": [1242, 2208],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "5.5",
+        "logicalResolution": [414, 736],
+        "ppi": 401,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "8 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 8 Plus",
+        "identicalTo": ["iPhone 7 Plus", "iPhone 6s Plus"]
+      },
+      {
+        "actualResolution": [1242, 2208],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "5.5",
+        "logicalResolution": [414, 736],
+        "ppi": 401,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "7 Plus",
+        "kind": "iPhone",
+        "name": "iPhone 7 Plus",
+        "identicalTo": ["iPhone 8 Plus", "iPhone 6s Plus"]
+      },
+      {
+        "actualResolution": [1242, 2208],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "5.5",
+        "logicalResolution": [414, 736],
+        "ppi": 401,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "6s Plus",
+        "kind": "iPhone",
+        "name": "iPhone 6s Plus",
+        "identicalTo": ["iPhone 8 Plus", "iPhone 7 Plus"]
+      },
+      {
+        "actualResolution": [1242, 2688],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "6.5",
+        "logicalResolution": [414, 896],
+        "ppi": 458,
+        "scaleFactor": 3,
+        "generation": null,
+        "model": "XS Max",
+        "kind": "iPhone",
+        "name": "iPhone XS Max"
+      },
+      {
+        "actualResolution": [640, 1136],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4",
+        "logicalResolution": [320, 568],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 7,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 7)",
+        "identicalTo": [
+          "iPhone SE (gen 1)",
+          "iPod Touch (gen 6)",
+          "iPod Touch (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [640, 1136],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4",
+        "logicalResolution": [320, 568],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 6,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 6)",
+        "identicalTo": [
+          "iPhone SE (gen 1)",
+          "iPod Touch (gen 7)",
+          "iPod Touch (gen 5)"
+        ]
+      },
+      {
+        "actualResolution": [640, 1136],
+        "aspectRatio": "9 : 16",
+        "diagonalSize": "4",
+        "logicalResolution": [320, 568],
+        "ppi": 326,
+        "scaleFactor": 2,
+        "generation": 5,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 5)",
+        "identicalTo": [
+          "iPhone SE (gen 1)",
+          "iPod Touch (gen 7)",
+          "iPod Touch (gen 6)"
+        ]
+      },
+      {
+        "actualResolution": [640, 960],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "3.5",
+        "logicalResolution": [320, 480],
+        "ppi": 163,
+        "scaleFactor": 1,
+        "generation": 4,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 4)",
+        "identicalTo": ["iPod Touch (gen 3)", "iPod Touch (gen 2)"]
+      },
+      {
+        "actualResolution": [640, 960],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "3.5",
+        "logicalResolution": [320, 480],
+        "ppi": 163,
+        "scaleFactor": 1,
+        "generation": 3,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 3)",
+        "identicalTo": ["iPod Touch (gen 4)", "iPod Touch (gen 2)"]
+      },
+      {
+        "actualResolution": [640, 960],
+        "aspectRatio": "3 : 4",
+        "diagonalSize": "3.5",
+        "logicalResolution": [320, 480],
+        "ppi": 163,
+        "scaleFactor": 1,
+        "generation": 2,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 2)",
+        "identicalTo": ["iPod Touch (gen 4)", "iPod Touch (gen 3)"]
+      },
+      {
+        "actualResolution": [480, 320],
+        "aspectRatio": "3 : 2",
+        "diagonalSize": "3.5",
+        "logicalResolution": [240, 320],
+        "ppi": 163,
+        "scaleFactor": 1,
+        "generation": 1,
+        "model": "Touch",
+        "kind": "iPod",
+        "name": "iPod Touch (gen 1)"
+      }
+    ],
+
+    "iconSizes": [
+      16, 20, 29, 32, 40, 48, 50, 55, 57, 58, 60, 64, 66, 72, 76, 80, 87, 88,
+      92, 100, 102, 108, 114, 120, 128, 144, 152, 167, 172, 180, 192, 196, 216,
+      234, 256, 256, 384, 512, 1024
+    ],
+    "macOSIconSizes": [1024, 512, 256, 128, 64]
+  },
+  "android": {
+    "maskedIconSizes": [1024, 512, 384, 256, 192, 128, 96, 72, 48]
+  },
+  "mstile": {
+    "sizes": [
+      [70, 70],
+      [144, 144],
+      [150, 150],
+      [310, 150],
+      [310, 310]
+    ]
+  }
+}

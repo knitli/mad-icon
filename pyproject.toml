@@ -1,0 +1,57 @@
+[project]
+name = "mad-icon"
+version = "0.1.0"
+description = "An obsessively thorough command line tool to generate progressive web app icons and launch screen images."
+readme = "README.md"
+authors = [{ name = "Adam Poulemanos", email = "adam@knit.li" }]
+requires-python = ">=3.11"
+dependencies = [
+    "cairosvg>=2.7.1",
+    "defusedxml>=0.7.1",
+    "lxml>=5.3.2",
+    "pillow>=11.2.1",
+    "pydantic>=2.11.3",
+    "rich>=14.0.0",
+    "type-extensions>=0.1.2",
+    "typer>=0.15.2",
+    "typing-extensions>=4.13.2",
+]
+
+[project.scripts]
+pwa-generator = "mad_icon:__main__"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "bump-my-version>=1.1.2",
+    "glom>=24.11.0",
+    "ipython>=9.1.0",
+    "pylance>=0.25.2",
+    "pyright>=1.1.399",
+    "pytest>=8.3.5",
+    "ruff>=0.11.5",
+    "tomli>=2.2.1",
+    "tqdm>=4.67.1",
+    "typos>=1.31.1",
+]
+
+[tool.pyright]
+include = ["src/**/*.py", "tests/**/*.py"]
+strict = ["src/**/*.py"]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.pytest_cache",
+    "**/.mypy_cache",
+    ".cache/**",
+    ".venv/**",
+    ".eggs/**",
+    "dist/**",
+    "src/typings/**",
+]
+venvPath = ".venv"
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
