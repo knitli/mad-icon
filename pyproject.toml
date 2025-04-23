@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.scripts]
-pwa-generator = "mad_icon:__main__"
+mad = "mad_icon:__main__"
 
 [build-system]
 requires = ["hatchling"]
