@@ -1,24 +1,33 @@
-# Mad-Icon
+# Mad Icon
 
 ## About
 
-Mad-Icon, or simply `mad` is a cli tool that generates icons for progressive web apps (PWAs) and web applications. If you want people to be able to save your web app on their device home screen or desktop like a native app, you need to use a tool like this to generate the icons, necessary HTML, and manifest.json file. Similarly, Apple allows for web apps to have launch or launch screen images (mostly used in the app switcher to represent your app, and while loading the app). This tool generates those images as well.
+Mad Icon, or simply `mad`, is a cli tool that generates icons for progressive web apps (PWAs) and web applications. If you want people to be able to save your web app on their device home screen or desktop like a native app, you need to use a tool like this to generate the icons, necessary HTML, and manifest.json file. Similarly, Apple allows for web apps to have launch or launch screen images (mostly used in the app switcher to represent your app, and while loading the app). This tool generates those images as well.
 
-### Features
+Why 'mad'? Two reasons:
+
+1. It's absolutely *raving mad* how many different assets you need to actually cover all the platforms and devices, and
+2. It's maddening that the big players have allowed this to become a standard. It's a mess, and it's hard to find the right information. This tool is an attempt to make it easier.
+
+Note 📓: You'll find different information out there about how much of this is or isn't necessary today. It's true that *most* devices can make use of just a couple files, but if you want to cover all bases and situations, you'll need over a hundred. 'Vanilla' websites can get away with a fraction of that, but if you want your users to be able to use your web app like any other app on any platform -- you'll find what you need here.
+
+### ✅ Features
 
 - Generates icons for all platforms (Apple, Android, and Windows), up to 2025 and including *all* legacy devices and browsers.
 
-- **Apple**: Generates icons for all iOS/iPadOS and MacOS devices, including iPhone, iPad, iPod Touch, and MacOS. WatchOS and tvOS is not currently supported; submit an issue or PR if you want to add support for that. Apple support includes:
+- 🍏 **Apple**: Generates icons for all iOS/iPadOS and MacOS devices, including iPhone, iPad, iPod Touch, and MacOS. WatchOS and tvOS is not currently supported; submit an issue or PR if you want to add support for that. Apple support includes:
 
   - Light and dark mode icons for all devices.
   - Tinted icons for all devices (not currently supported by Apple, see Apple Tinted Icons below).
   - Light and dark mode launch screen images for all devices.
   - Light and dark mode MacOS icons for the dock and desktop.
 
-- **Android**: Generates icons for all Android devices, including legacy devices and modern devices. Android support includes:
+- 🤖 **Android**: Generates icons for all Android devices, including legacy devices and modern devices. Android support includes:
   - Legacy icons for all devices.
   - Masked icons for all devices (Android 6.0 and above).
   - Masked monochrome icons for all devices (Android 6.0 and above).
+
+- 🪟 **Windows**: Generates legacy `tile` icons for Windows 8/IE 11
 
 - Generates all the necessary HTML and manifest.json files to support the icons and launch screens; uses media queries to target specific devices, platforms, and modes.
 
@@ -52,18 +61,18 @@ mad generate-icons --help
 mad generate
 ```
 
-## Tl;dr - What You Need to Get Started
+## 🚀 What You Need to Get Started
 
 ### Recommended Resources
 
-**SVG images.** you can use Inkscape[https://inkscape.org/] to modify or create them. Inkscape is free. You may also use various free and paid online tools like Figma, Canva, etc.
+**SVG images.** you can use Inkscape[https://inkscape.org/] to modify or create them. Inkscape is free. You may also use various free and paid online tools like Figma or Canva.
 
 **Raster images.** like PNG, JPG, or WEBP, you can use any image editor like GIMP, Photoshop, etc. You can also use online tools like Canva, Figma, etc.
 
 **Manifest/HTML.** You can use any text editor to modify the manifest.json and HTML files. You can also use online tools to modify or test your html and `manifest.json` files, such as [CodePen](https://codepen.io/) or [JSFiddle](https://jsfiddle.net/).
 **Command line.** You can use any command line tool to run the mad command. You can also use online tools like [Replit](https://replit.com/) or [Glitch](https://glitch.com/) to run the command (untested).
 
-### What You Need to Get Started
+### 🟢 What You Need to Get Started 🟢
 
 For the full package, you need:
 
@@ -92,7 +101,7 @@ For the full package, you need:
 - A 310x150 pixel image for the Windows 8 start menu (or 'tile').
 - Separate masked and unmasked versions of your icon.
 
-Puttit it all together, including the nice-to-haves in a directory:
+Put it it all together, including the nice-to-haves in a directory:
 
 ```bash
 mad generate \
@@ -141,7 +150,7 @@ It uses media queries to target specific devices, platforms, and modes. It also 
 
 This is based on current requirements as best I can tell. This is a moving target, and Apple's documentation is very poor in this area.
 
-- **Apple Touch Icons**: Apple requires you define images for each icon size of all possible icon sizes, with each defined in the `<HEAD>` tag of the HTML. We consider these 'light mode' icons. Requirements:
+- 🍏 **Apple Touch Icons**: Apple requires you define images for each icon size of all possible icon sizes, with each defined in the `<HEAD>` tag of the HTML. We consider these 'light mode' icons. Requirements:
 
   - In all possible resolutions (currently almost 50 sizes)
   - Fully opaque background and foreground (no transparency)
@@ -149,7 +158,7 @@ This is based on current requirements as best I can tell. This is a moving targe
   - No drop shadows (Apple will add them for you)
   - Seriously, no transparency.
 
-- **Apple Dark Mode**: If you want your icons not to stand out in dark mode (in a bad way), you need to provide a dark mode icon. Like with the touch icons, you can use media selectors to isolate the dark mode icon (`prefers-color-scheme: dark`). You can't make this responsive -- if the user changes their preference, the icon won't change unless they revisit your app and re-add the icon.
+- 🍏 **Apple Dark Mode**: If you want your icons not to stand out in dark mode (in a bad way), you need to provide a dark mode icon. Like with the touch icons, you can use media selectors to isolate the dark mode icon (`prefers-color-scheme: dark`). You can't make this responsive -- if the user changes their preference, the icon won't change unless they revisit your app and re-add the icon.
 
   - In all possible resolutions (currently almost 50 sizes)
   - *transparent background* :ghost: (Apple adds a dark gradient background for you)
@@ -157,7 +166,7 @@ This is based on current requirements as best I can tell. This is a moving targe
   - No rounded corners (Apple will round them for you)
   - No drop shadows (Apple will add them for you)
 
-- **Apple Tinted Icons**: There's currently no way to specify icons for Apple's tinted icons feature. We provide tinted icons in the most likely implementation path, using `purpose='monochrome'` in the manifest.json file. These won't get used for now, but should Apple add support for tinted icons, this will probably be the way to do it.
+- 🍏 **Apple Tinted Icons**: There's currently no way to specify icons for Apple's tinted icons feature. We provide tinted icons in the most likely implementation path, using `purpose='monochrome'` in the manifest.json file. These won't get used for now, but should Apple add support for tinted icons, this will probably be the way to do it.
 
   - *transparent background* :ghost: (Apple adds a dark gradient background for you)
   - *grayscale foreground* :gray-exclamation: (Apple adds the color tint mask for you)
@@ -165,7 +174,7 @@ This is based on current requirements as best I can tell. This is a moving targe
   - No drop shadows (Apple will add them for you)
   - No transparency in the foreground
 
-- **Apple launch Screens**: Apple requires you define images for each icon size of all possible launch screen sizes, with each defined in the `<HEAD>` tag of the HTML. The launch screens are used in the app switcher and while loading the app. The launch screens are defined in the `manifest.json` file. You can use media queries to target light and dark modes.
+- 🍏 **Apple launch Screens**: Apple requires you define images for each icon size of all possible launch screen sizes, with each defined in the `<HEAD>` tag of the HTML. The launch screens are used in the app switcher and while loading the app. The launch screens are defined in the `manifest.json` file. You can use media queries to target light and dark modes.
 
   - In all possible resolutions/aspect ratios **and** orientations'
   - We allow dark mode versions using media queries if you provide a dark mode image.
@@ -174,20 +183,20 @@ This is based on current requirements as best I can tell. This is a moving targe
   - No drop shadows (Apple will add them for you)
   - Seriously, no transparency.
 
-- **Apple MacOS Icons**: MacOS Safari, unlike all other devices, actually uses the `manifest.json` file. However, you have to supply special icons that are already cropped/masked to the rounded shape of the icon. You can define light and dark modes for the icons using the `purpose` attribute.
+- 🍏 **Apple MacOS Icons**: MacOS Safari, unlike all other devices, actually uses the `manifest.json` file. However, you have to supply special icons that are already cropped/masked to the rounded shape of the icon. You can define light and dark modes for the icons using the `purpose` attribute.
 
-- **Android Legacy Icons**: For legacy Android devices, the implementation is much simpler. You just need to provide an icon image in 256x256 and 192x192 sizes. These are described in the `manifest.json` file.
+- 🤖 **Android Legacy Icons**: For legacy Android devices, the implementation is much simpler. You just need to provide an icon image in 256x256 and 192x192 sizes. These are described in the `manifest.json` file.
 
-- **Android Masked Icons**: Modern Android devices use masked icons, which allow manufacturers to define the shape of the icon. The specification requires you provide icons with no content (you care about) within 20% of the edges of the image, which can be cropped to fit the manufacturer shape.
+- 🤖 **Android Masked Icons**: Modern Android devices use masked icons, which allow manufacturers to define the shape of the icon. The specification requires you provide icons with no content (you care about) within 20% of the edges of the image, which can be cropped to fit the manufacturer shape.
 
-- **Android Monochrome Icons**: Android also supports monochrome icons, which allow for single color icons; these need to meet the same requirements as the masked icons in terms of content.
+- 🤖 **Android Monochrome Icons**: Android also supports monochrome icons, which allow for single color icons; these need to meet the same requirements as the masked icons in terms of content.
 
-- **Windows Icons**: Windows uses the same icons as Android, but legacy Internet Explorer and Windows 8 use special sizes, such as for the start menu. This tool generates those icons as well for the 5 people still using Windows 8 and IE 11. These are known as `tile` icons. Necessary? Probably not, but when you're already generating hundreds of icons, why not add a few more?
+- 🪟 **Windows Icons**: Windows uses the same icons as Android, but legacy Internet Explorer and Windows 8 use special sizes, such as for the start menu. This tool generates those icons as well for the 5 people still using Windows 8 and IE 11. These are known as `tile` icons. Necessary? Probably not, but when you're already generating hundreds of icons, why not add a few more?
 
   - it's worth noting that there is a size that is *not square* (310x150) for the Windows 8 start (or 'tile') menu.
   - The tool allows you to specify a custom image for this rectangular icon, but will happily generate one if you don't.
 
-## Other Useful Things
+## 🧰 Other Useful Things
 
 This tool includes a json file with **all** apple device resolutions, sizes, ppi, aspect ratios, and other useful information. You can generate one for yourself with `mad get-data`. We'd appreciate PRs to keep this updated when new devices get released (we'll try, but let's help each other out -- it'll be easier to maintain this than starting over).
 

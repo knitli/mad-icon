@@ -6,6 +6,11 @@ dist/
 wheels/
 *.egg-info
 remote-debug-profile/
+lib/
+lib64/
+*.egg
+.cache/
+.pytest_cache/
 
 # Virtual environments
-.venv
+.venv/
