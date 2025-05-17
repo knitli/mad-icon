@@ -16,49 +16,40 @@ def calculate_bounding_box(surface, node):
     See https://www.w3.org/TR/SVG/coords.html#ObjectBoundingBox
 
     """
-    ...
 
 def bounding_box_rect(
     surface, node
 ):  # -> tuple[float | Any | Literal[0], float | Any | Literal[0], float | Any | Literal[0], float | Any | Literal[0]]:
     """Get the bounding box of a ``rect`` node."""
-    ...
 
 def bounding_box_circle(
     surface, node
 ):  # -> tuple[float | Any | int, float | Any | int, float | Any | int, float | Any | int]:
     """Get the bounding box of a ``circle`` node."""
-    ...
 
 def bounding_box_ellipse(
     surface, node
 ):  # -> tuple[float | Any | int, float | Any | int, float | Any | int, float | Any | int]:
     """Get the bounding box of an ``ellipse`` node."""
-    ...
 
 def bounding_box_line(
     surface, node
 ):  # -> tuple[float | Any | int, float | Any | int, float | Any | int, float | Any | int]:
     """Get the bounding box of a ``line`` node."""
-    ...
 
 def bounding_box_polyline(surface, node):  # -> tuple[Any, Any, Any, Any]:
     """Get the bounding box of a ``polyline`` or ``polygon`` node."""
-    ...
 
 def bounding_box_path(
     surface, node
 ):  # -> tuple[float, float, Literal[0], Literal[0]] | tuple[Any, Any, Any, Any]:
     """Get the bounding box of a ``path`` node."""
-    ...
 
 def bounding_box_text(surface, node):
     """Get the bounding box of a ``text`` node."""
-    ...
 
 def angle(bx, by):  # -> float:
     """Get the angle between vector (1,0) and vector (bx,by)."""
-    ...
 
 def bounding_box_elliptical_arc(x1, y1, rx, ry, phi, large, sweep, x, y):
     """Get the bounding box of an elliptical arc described by the parameters.
@@ -67,32 +58,25 @@ def bounding_box_elliptical_arc(x1, y1, rx, ry, phi, large, sweep, x, y):
     http://fridrich.blogspot.nl/2011/06/bounding-box-of-svg-elliptical-arc.html
 
     """
-    ...
 
 def bounding_box_group(
     surface, node
 ):  # -> tuple[float, float, Literal[0], Literal[0]] | tuple[Any, Any, Any, Any]:
     """Get the bounding box of a ``g`` node."""
-    ...
 
 def bounding_box_use(surface, node):  # -> None:
     """Get the bounding box of a ``use`` node."""
-    ...
 
 def extend_bounding_box(bounding_box, points):  # -> tuple[Any, Any, Any, Any]:
     """Extend the ``bounding_box`` by the points."""
-    ...
 
 def combine_bounding_box(bounding_box, another_bounding_box):  # -> tuple[Any, Any, Any, Any]:
     """Combine the ``bounding_box`` with ``another_bounding_box``."""
-    ...
 
 def is_valid_bounding_box(bounding_box):  # -> bool:
     """Know whether bounding box has been initialized."""
-    ...
 
 def is_non_empty_bounding_box(bounding_box):  # -> bool:
     """Know whether bounding box is valid and has a size."""
-    ...
 
 BOUNDING_BOX_METHODS = ...

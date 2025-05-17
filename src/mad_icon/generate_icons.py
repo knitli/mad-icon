@@ -6,23 +6,28 @@ Licensed under the [Plain Apache License](https://plainlicense.org/licenses/perm
 Command for generating icons.
 """
 
-# Removed unused imports like io, json, Sequence, cast, etc.
-# Removed specific image processing imports as they are now in helpers
 from pathlib import Path
 from typing import IO, TYPE_CHECKING, Annotated, Any
 
 import typer
 
-# Import the public helper functions
+from mad_icon.types import (
+    IconGenerationConfig,
+    IconGenerationContext,
+    IconGenerationFlag,
+    IconSourceKey,
+    get_flag_config,
+)
+
 from mad_icon.utilities import (
     cleanup_resources,
     determine_source_images,
-    has_value,
     generate_output_files,
+    has_value,  # Keep has_value for base_icon check
     prepare_output_directories,
     process_icon_category,
+    retrieve_model,
     validate_and_load_base_icon,
-    retrieve_model
 )
 
 
@@ -36,6 +41,47 @@ FileBinaryRead = typer.FileBinaryRead
 
 # Keep cwd if used for default paths, otherwise remove
 cwd = Path.cwd()
+
+
+def get_non_flag_kwargs(kwargs: dict[str, Any]) -> dict[str, Any]:
+    """
+
+    """
+    non_source_keys = ("prefix", "destination_dir", "html_destination", "html_file_name","json_path")
+    image_kwargs, non_image_kwargs = {}, {}
+    for k, v in kwargs.items():
+        if not has_value(v):
+            continue
+        if k in non_source_keys:
+            non_image_kwargs[k] = v
+        image_kwargs[IconSourceKey.from_flag(k)] = v
+    if "html_destination" and "html_file_name" in non_image_kwargs:
+        name = non_image_kwargs.pop("html_file_name")
+        non_image_kwargs["html_destination"] = non_image_kwargs["html_destination"] / name if name not in str(html_destination) else html_destination
+
+    return {k: v for k, v in kwargs.items() if not k.startswith("--") and not k.startswith("-")}
+
+
+def parse_arguments(kwargs: dict[str, Any]) -> None:
+    """
+    Parse command line arguments and options.
+    This function is called when the script is executed.
+    """
+    icon_kwargs, non_icon_kwargs = get_non_flag_kwargs(kwargs), get_non_flag_kwargs(kwargs)
+    received_flags = {k: IconGenerationFlag.from_value(k) for k, v in kwargs.items() if v and k in IconGenerationFlag.__members__}
+    possible_flags = IconGenerationFlag.get_all_flags()
+    other_kwargs = {k: v for k, v in kwargs.items() if v and "icon" in k or k in non_source_keys}
+    other_kwargs = {k: (IconSourceKey.from_flag(k), v) for k, v in other_kwargs.items() if "icon" in k or k in ("prefix", "destination_dir", "html_destination", "json_path")}
+    for k, v in other_kwargs.items():
+        if "icon" in k:
+            other_kwargs[k] = (IconSourceKey.from_flag(k), v)
+        elif "destination" in k or "path" in k:
+            if "html" in k and
+    non_icon_flags = [flag for flag in received_flags.values() if flag and flag in possible_flags and IconGenerationFlag.is_not_icon_flag(flag)]
+    icon_flags = [flag for flag in received_flags.values() if not IconGenerationFlag.is_not_icon_flag(flag)]
+    if non_icon_flags and IconGenerationFlag.NO_ICONS in non_icon_flags:
+        if icon_flags and not
+
 
 
 @app.command("generate-icons")
@@ -133,7 +179,9 @@ def generate_icons(
             False,
             "--no-icons",
             is_eager=True,
-            help="Use `--no-icons` to disable all icon generation, producing only the HTML and manifest. We'll pretend you generated images with whatever settings you provide. You can also use this to only generate certain types of images without generating the base apple touch icons by explicitly passing the flags for those types (such as `--masked`)")] = False,
+            help="Use `--no-icons` to disable all icon generation, producing only the HTML and manifest. We'll pretend you generated images with whatever settings you provide. You can also use this to only generate certain types of images without generating the base apple touch icons by explicitly passing the flags for those types (such as `--masked`)",
+        ),
+    ] = False,
     masked: Annotated[
         bool,
         typer.Option(
@@ -142,7 +190,11 @@ def generate_icons(
         ),
     ] = True,
     monochrome: Annotated[
-        bool, typer.Option(True, help="Use --monochrome to override a `--no-masked` flag if you want masked monochrome images without masked images.")
+        bool,
+        typer.Option(
+            True,
+            help="Use --monochrome to override a `--no-masked` flag if you want masked monochrome images without masked images.",
+        ),
     ] = True,
     darkmode: Annotated[
         bool, typer.Option(True, help="Use `--no-darkmode` to disable dark mode icon generation.")
@@ -193,7 +245,7 @@ def generate_icons(
     attempt_svg_analysis: Annotated[
         bool,
         typer.Option(
-            False,  # Default value first
+            False,
             help="[Experimental] Attempt to analyze input SVG structure to automatically handle backgrounds for dark/tinted modes. If you only provide a base-icon and keep the other flags on their defaults, this will be used to generate the other icons. If you provide a masked-icon, this will be ignored. You can use this flag to override the default behavior.",
         ),
     ] = False,
@@ -204,78 +256,145 @@ def generate_icons(
     """
     typer.echo("Starting PWA icon generation...")
 
-    # Consolidate CLI args into a single config dict for easier passing
-    # Using locals() is convenient but be mindful of potential extra variables
-    cli_config = {k: v for k, v in locals().items() if not k.startswith("_")}
-    cli_config["sizes"] = retrieve_model(cli_config["json_path"]).size_data
-    processed_cli_config = process_icon_kwargs(
-        cli_config)
-
-    pwa_model: MadIconModel | None = None
-    opened_json_file: IO[bytes] | None = None
+    # --- Refactored Initialization ---
+    mad_model: MadIconModel | None = None
+    opened_json_file: IO[bytes] | None = None  # Keep track for cleanup
     all_html_tags: list[str] = []
     all_manifest_icons: list[dict[str, Any]] = []
 
     try:
-        # 1. Load PWA Model
-        pwa_model, opened_json_file = load_mad_model(cli_config["json_path"])
+        # 1. Load Mad Model (/models/models.py)
+        mad_model: 'MadIconModel | None' = retrieve_model(json_path)
 
-        # 2. Prepare Output Dirs
-        output_paths = prepare_output_directories(cli_config)
+        # 2. Parse flags and options
+        received_flags = {k: IconGenerationFlag.from_value(k) for k, v in locals().items() if v and k in IconGenerationFlag.__members__}
+        flags = IconGenerationFlag.get_all_flags()
+        explicit_icon_flags_set = any([masked, monochrome, darkmode, tinted, macos, ms_tiles])
+        for flag in flags:
+            if flag.value in received_flags:
+                active_flags.append(flag)
 
-        # 3. Validate Inputs & Load Base Icon
-        # Ensure base-icon is not None before passing (Typer should handle this)
-        has_value(cli_config["base-icon"])
+        # 2. Prepare Output Dirs (Passing explicit args for now)
+        # TODO: Refactor prepare_output_directories later to accept context or fewer args
+        prep_dir_config = {
+            "destination_dir": destination_dir,
+            "icon_dir_name": prefix,  # Assuming prefix is used as icon dir name base
+            "html_destination": html_destination,
+            "generate_masked_icons": masked or monochrome,  # Simplified logic
+            "generate_darkmode_icons": darkmode,
+            "generate_tinted_icons": tinted,
+            "generate_macos_icons": macos,
+            "generate_ms_tiles": ms_tiles,
+            "generate_html": html,
+            "generate_manifest": manifest,
+        }
+        output_paths = prepare_output_directories(prep_dir_config)
 
+        has_value(base_icon)  # Check base_icon is provided
+        # 3. Validate and Load Base Icon
         base_icon_data, _, base_icon_type = validate_and_load_base_icon(
-            cli_config["base-icon"],
-            cli_config["masked_image"],
-            generate_masked_icons=cli_config["generate_masked_icons"],
+            base_icon,
+            masked_icon,  # Pass the arg directly
+            generate_masked_icons=masked or monochrome,  # Pass explicit flag
         )
 
         # 4. Determine Source Images for Each Category
-        source_data, source_type = determine_source_images(
-            cli_config, base_icon_data, base_icon_type
-        )    generate_manifest: Annotated[
-        bool,
-        typer.Option(
-            True,  # Default value first
-            "--generate-manifest/--no-generate-manifest",
-            help="Whether to generate a manifest.json file.",
-        ),
-    ] = True,
-        # 5. Get Icon Config Categories
-        icon_categories_config = ICON_CONFIG
+        source_images: dict[IconSourceKey, tuple[bytes, str]] = determine_source_images(
+            base_icon_data=base_icon_data,
+            base_icon_type=base_icon_type,
+            masked_icon_arg=masked_icon,
+            monochrome_icon_arg=masked_monochrome_icon,
+            dark_icon_arg=apple_darkmode_icon,
+            tinted_icon_arg=apple_tinted_icon,
+            tile_rect_icon_arg=tile_rectangle_icon,
+        )
 
-        # 6. Process Each Icon Category
+        # 5. Determine Active Flags & Generate Configs
+
+        if no_icons:
+            if html:
+                active_flags.append(IconGenerationFlag.HTML)
+            if manifest:
+                active_flags.append(IconGenerationFlag.MANIFEST)
+            # If specific icon flags are also true, add them despite no_icons
+            if masked:
+                active_flags.append(IconGenerationFlag.MASKED)
+            if monochrome:
+                active_flags.append(IconGenerationFlag.MONOCHROME)
+            if darkmode:
+                active_flags.append(IconGenerationFlag.DARKMODE)
+            if tinted:
+                active_flags.append(IconGenerationFlag.TINTED)
+            if macos:
+                active_flags.append(IconGenerationFlag.MACOS)
+            if ms_tiles:
+                active_flags.append(IconGenerationFlag.MS_TILES)
+        else:
+            # Default: Add APPLE_TOUCH if no other icon flag is explicitly set true
+            if not explicit_icon_flags_set:
+                active_flags.append(IconGenerationFlag.APPLE_TOUCH)
+            # Add flags that are true
+            if masked:
+                active_flags.append(IconGenerationFlag.MASKED)
+            # Handle monochrome potentially overriding --no-masked
+            if monochrome and not masked:
+                if IconGenerationFlag.MASKED not in active_flags:
+                    active_flags.append(IconGenerationFlag.MASKED)  # Add masked base
+                active_flags.append(IconGenerationFlag.MONOCHROME)
+            elif monochrome and masked:  # If both are true
+                active_flags.append(IconGenerationFlag.MONOCHROME)
+
+            if darkmode:
+                active_flags.append(IconGenerationFlag.DARKMODE)
+            if tinted:
+                active_flags.append(IconGenerationFlag.TINTED)
+            if macos:
+                active_flags.append(IconGenerationFlag.MACOS)
+            if ms_tiles:
+                active_flags.append(IconGenerationFlag.MS_TILES)
+            if html:
+                active_flags.append(IconGenerationFlag.HTML)
+            if manifest:
+                active_flags.append(IconGenerationFlag.MANIFEST)
+
+        # Remove duplicates just in case
+        active_flags = sorted(set(active_flags), key=lambda f: f.value)
+
+        active_configs: list[IconGenerationConfig] = [
+            get_flag_config(flag) for flag in active_flags
+        ]
+
+        # 6. Instantiate Context
+        context = IconGenerationContext(
+            mad_model=mad_model,
+            source_images=source_images,
+            output_paths=output_paths,
+            active_configs=active_configs,
+            html_destination=html_destination,
+            destination_dir=destination_dir,
+            icon_name_prefix=prefix,
+            generate_html=html,
+            generate_manifest=manifest,
+        )
+
+        # --- Refactored Main Loop ---
         typer.echo("Generating icon sets...")
-        for category_config in icon_categories_config:
-            # Check generation flag using the key from the config
-            flag_key = category_config.get("flag_key")
-
-            # Check if the category should be skipped based on the flag
-            should_skip = False
-            if flag_key is not None and (
-                isinstance(flag_key, str) and not cli_config.get(flag_key)
-            ):
-                should_skip = True
-
-            if should_skip:
-                typer.echo(
-                    f"Skipping {category_config['name']} icons (disabled by flag: {flag_key})."
-                )
+        for config in context.active_configs:
+            # Use .get() for safe access to TypedDict keys
+            if not config.get("is_icon_flag", False):  # Default to False if key missing
+                typer.echo(f"Skipping non-icon task: {config.get("name", "Unknown Task")}")
                 continue
 
-            typer.echo(f"--- Generating {category_config['name']} Icons ---")
+            typer.echo(f"--- Generating {config.get("name", "Unknown Category")} Icons ---")
             try:
-                # Call the helper function for this category
+                # TODO: Refactor process_icon_category to accept context and config
+                # For now, adapt the call signature or pass necessary parts
+                # Assuming process_icon_category will be refactored to:
+                # process_icon_category(context: IconGenerationContext, config: IconGenerationConfig)
                 html_tags, manifest_icons = process_icon_category(
-                    category_config=category_config,
-                    pwa_model=pwa_model,
-                    source_data=source_data,
-                    source_type=source_type,
-                    output_paths=output_paths,
-                    cli_config=cli_config,
+                    context=context,  # Pass context
+                    config=config,  # Pass specific config for this category
+                    # Remove old args: category_config, mad_model, source_data, source_type, output_paths, cli_config
                 )
                 # Aggregate results
                 all_html_tags.extend(html_tags)
@@ -283,12 +402,14 @@ def generate_icons(
             except Exception as e:
                 # Log error and continue with the next category
                 typer.echo(
-                    f"  Error processing category '{category_config['name']}': {e}", err=True
+                    f"  Error processing category '{config.get("name", "Unknown Category")}': {e}",
+                    err=True,
                 )
                 # Optionally re-raise if errors should halt the whole process
 
         # 7. Generate Output Metadata Files
-        generate_output_files(all_html_tags, all_manifest_icons, output_paths, cli_config)
+        # TODO: Refactor generate_output_files to accept context
+        generate_output_files(all_html_tags, all_manifest_icons, context)  # Pass context
 
         typer.echo("PWA icon generation process complete.")
 
@@ -303,7 +424,22 @@ def generate_icons(
         # typer.echo(traceback.format_exc(), err=True)
         raise typer.Exit(code=1) from e
     finally:
-        cleanup_resources(cli_config, opened_json_file)
+        # TODO: Refactor cleanup_resources to accept explicit file args
+        # Need to track which files were opened (base_icon, masked_icon etc.)
+        files_to_close = [
+            f
+            for f in [
+                base_icon,
+                masked_icon,
+                masked_monochrome_icon,
+                apple_darkmode_icon,
+                apple_tinted_icon,
+                tile_rectangle_icon,
+                json_path,  # Include json_path if it was opened
+            ]
+            if f is not None
+        ]
+        cleanup_resources(files_to_close, opened_json_file)  # Pass list of files
 
 
 if __name__ == "__main__":

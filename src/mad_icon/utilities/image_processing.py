@@ -66,7 +66,7 @@ def render_svg_to_png_bytes(svg_data: bytes | str, width: int, height: int) -> b
 def resize_image(image: Image.Image, width: int, height: int) -> Image.Image:
     """Resizes a Pillow Image object."""
     try:
-        return image.resize((width, height), Image.Resampling.LANCZOS) # type: ignore
+        return image.resize((width, height), Image.Resampling.LANCZOS)  # type: ignore
     except Exception as e:
         # TODO: Add specific error handling
         print(f"Error resizing image: {e}")

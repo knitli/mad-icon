@@ -6,6 +6,7 @@ Licensed under the [Plain Apache License](https://plainlicense.org/licenses/perm
 from mad_icon.types.icon_generation_types import (
     IconDescriptiveName,
     IconGenerationConfig,
+    IconGenerationContext,  # Added IconGenerationContext
     IconGenerationFlag,
     IconSizeData,
     IconSizeGroup,
@@ -32,6 +33,7 @@ __all__ = [
     "IconDescriptiveName",
     "IconGenerationConfig",
     "IconGenerationFlag",
+    "IconGenerationContext",  # Added IconGenerationContext
     "IconSizeData",
     "IconSizeGroup",
     "IconSizesType",

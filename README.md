@@ -1,13 +1,16 @@
 # Mad Icon
 
+**Current Status**: Alpha. This is a work in progress. Screen generation is not yet implemented.
+
 ## About
 
 Mad Icon, or simply `mad`, is a cli tool that generates icons for progressive web apps (PWAs) and web applications. If you want people to be able to save your web app on their device home screen or desktop like a native app, you need to use a tool like this to generate the icons, necessary HTML, and manifest.json file. Similarly, Apple allows for web apps to have launch or launch screen images (mostly used in the app switcher to represent your app, and while loading the app). This tool generates those images as well.
 
-Why 'mad'? Two reasons:
+Why 'mad'? Three reasons:
 
 1. It's absolutely *raving mad* how many different assets you need to actually cover all the platforms and devices, and
 2. It's maddening that the big players have allowed this to become a standard. It's a mess, and it's hard to find the right information. This tool is an attempt to make it easier.
+3. You'll end up with *mad* amounts of icons.
 
 Note 📓: You'll find different information out there about how much of this is or isn't necessary today. It's true that *most* devices can make use of just a couple files, but if you want to cover all bases and situations, you'll need over a hundred. 'Vanilla' websites can get away with a fraction of that, but if you want your users to be able to use your web app like any other app on any platform -- you'll find what you need here.
 

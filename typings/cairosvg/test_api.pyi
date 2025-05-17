@@ -16,20 +16,15 @@ SVG_SAMPLE = ...
 @pytest.mark.parametrize("format_name", MAGIC_NUMBERS)
 def test_formats(format_name):  # -> None:
     """Convert to a given format and test that output looks right."""
-    ...
 
 def read_file(filename):  # -> bytes:
     """Shortcut to return the whole content of a file as a byte string."""
-    ...
 
 def test_api():  # -> None:
     """Test the Python API with various parameters."""
-    ...
 
 def test_low_level_api():  # -> None:
     """Test the low-level Python API with various parameters."""
-    ...
 
 def test_script():  # -> None:
     """Test the ``cairosvg`` script and the ``main`` function."""
-    ...

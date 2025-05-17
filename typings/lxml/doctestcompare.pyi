@@ -113,7 +113,6 @@ def install(html=...):  # -> None:
     If html is true, then by default the HTML parser will be used;
     otherwise the XML parser is used.
     """
-    ...
 
 def temp_install(html=..., del_module=...):  # -> None:
     """
@@ -123,7 +122,6 @@ def temp_install(html=..., del_module=...):  # -> None:
     If html is true, then by default the HTML parser will be used;
     otherwise the XML parser is used.
     """
-    ...
 
 class _RestoreChecker:
     def __init__(

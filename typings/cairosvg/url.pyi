@@ -23,7 +23,6 @@ def normalize_url(url):
         - file:///C:/Directory/zzz.svg
 
     """
-    ...
 
 def nt_compatible_path(path):
     """Provide compatible NT file paths for ``os.path`` functions
@@ -37,7 +36,6 @@ def nt_compatible_path(path):
     eliminates the unwanted ``/`` at the beginning.
 
     """
-    ...
 
 def fetch(url, resource_type):  # -> _UrlopenRet:
     """Fetch the content of ``url``.
@@ -46,7 +44,6 @@ def fetch(url, resource_type):  # -> _UrlopenRet:
     image/*, image/svg+xml, text/css).
 
     """
-    ...
 
 def safe_fetch(
     url, resource_type
@@ -56,7 +53,6 @@ def safe_fetch(
     Otherwise, return an empty SVG.
 
     """
-    ...
 
 def parse_url(url, base=...):  # -> ParseResult:
     """Parse an URL.
@@ -65,11 +61,9 @@ def parse_url(url, base=...):  # -> ParseResult:
     the "folder" part of it is prepended to the URL.
 
     """
-    ...
 
 def read_url(url, url_fetcher, resource_type):
     """Get bytes in a parsed ``url`` using ``url_fetcher``.
 
     If ``url_fetcher`` is None a default (no limitations) URLFetcher is used.
     """
-    ...

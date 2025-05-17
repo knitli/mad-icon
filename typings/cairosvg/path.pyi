@@ -9,8 +9,6 @@ Paths manager.
 
 def draw_markers(surface, node):  # -> None:
     """Draw the markers attached to a path ``node``."""
-    ...
 
 def path(surface, node):
     """Draw a path ``node``."""
-    ...

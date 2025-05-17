@@ -13,8 +13,8 @@ from typing import Annotated
 
 import typer
 
-from rich.prompt import Prompt
 from rich import print_json
+from rich.prompt import Prompt
 
 from mad_icon.utilities import data_path
 

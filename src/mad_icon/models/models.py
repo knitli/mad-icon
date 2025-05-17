@@ -13,7 +13,7 @@ from typing import Annotated
 from pydantic import BaseModel, Field, field_validator
 
 from mad_icon.models.resolution import Resolution
-from mad_icon.types import IconSizesType, IconSizeData
+from mad_icon.types import IconSizeData, IconSizesType
 
 
 class DeviceType(Enum):
@@ -152,7 +152,7 @@ class MadIconModel(BaseModel):
     @property
     def size_data(self) -> IconSizeData:
         """
-        Get the size data for the PWA model.
+        Get the size data for the Mad Model.
         """
         return IconSizeData(
             touch_icons=self.apple.icon_sizes,
@@ -162,8 +162,8 @@ class MadIconModel(BaseModel):
         )
 
 
-def get_pwa_model(data: str | bytes | bytearray) -> MadIconModel:
-    """Get the PWA model from the `data.json` file."""
+def get_mad_model(data: str | bytes | bytearray) -> MadIconModel:
+    """Get the Mad Model from the `data.json` file."""
     return MadIconModel.model_validate_json(data)
 
 
@@ -175,5 +175,5 @@ __all__ = [
     "MsTileModel",
     "MadIconModel",
     "Resolution",
-    "get_pwa_model",
+    "get_mad_model",
 ]

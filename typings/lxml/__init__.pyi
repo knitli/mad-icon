@@ -10,4 +10,3 @@ def get_include():  # -> list[str]:
     and libxslt) needed to compile C code against lxml if it was built
     with statically linked libraries.
     """
-    ...

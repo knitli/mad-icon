@@ -1,5 +1,5 @@
 """
-Mad Icon
+Mad Icon.
 ===================
 A command-line tool for generating progressive web app (PWA) icons and splash screens for your webapp. **Because Apple hates webapps.** (as far as I can tell)
 

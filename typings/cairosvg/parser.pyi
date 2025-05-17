@@ -15,7 +15,6 @@ def handle_white_spaces(string, preserve):  # -> str:
     See http://www.w3.org/TR/SVG/text.html#WhiteSpace
 
     """
-    ...
 
 def normalize_style_declaration(name, value):  # -> tuple[Any, Any]:
     """Normalize style declaration consisting of name/value pair.
@@ -29,7 +28,6 @@ def normalize_style_declaration(name, value):  # -> tuple[Any, Any]:
         any declaration with url in value - url is case sensitive
 
     """
-    ...
 
 def normalize_noop_style_declaration(value):
     """No-operation for normalization where value is case sensitive.
@@ -38,7 +36,6 @@ def normalize_noop_style_declaration(value):
     lowercase (see normalize_style_declaration above).
 
     """
-    ...
 
 def normalize_url_style_declaration(value):
     """Normalize style declaration, but keep URL's as-is.
@@ -46,7 +43,6 @@ def normalize_url_style_declaration(value):
     Lowercase everything except for the URL.
 
     """
-    ...
 
 def normalize_font_style_declaration(value):  # -> str:
     """Make first part of font style declaration lowercase (case insensitive).
@@ -62,7 +58,6 @@ def normalize_font_style_declaration(value):  # -> str:
     See http://www.w3.org/TR/css-fonts-3/#font-prop
 
     """
-    ...
 
 class Node(dict):
     """SVG node with dict-like properties and children."""
@@ -70,14 +65,12 @@ class Node(dict):
         self, element, style, url_fetcher, parent=..., parent_children=..., url=..., unsafe=...
     ) -> None:
         """Create the Node from ElementTree ``node``, with ``parent`` Node."""
-        ...
 
     def fetch_url(self, url, resource_type): ...
     def text_children(
         self, element, trailing_space, text_root=...
     ):  # -> tuple[list[Any], bool | Any]:
         """Create children and return them."""
-        ...
 
     def get_href(self):  # -> None:
         ...
@@ -88,6 +81,5 @@ class Tree(Node):
         ...
     def __init__(self, **kwargs) -> None:
         """Create the Tree from SVG ``text``."""
-        ...
 
 CASE_SENSITIVE_STYLE_METHODS = ...

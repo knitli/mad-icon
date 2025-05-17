@@ -9,7 +9,6 @@ Licensed under the [Plain Apache License](https://plainlicense.org/licenses/perm
 
 import io
 
-from collections import defaultdict
 from enum import Enum
 from io import BufferedReader
 from pathlib import Path
@@ -20,7 +19,7 @@ import typer
 from pydantic import ValidationError
 from typing_extensions import TypeIs
 
-from mad_icon.models import MadIconModel, Resolution, get_pwa_model
+from mad_icon.models import MadIconModel, get_mad_model  # Removed Resolution
 from mad_icon.types import NONE_TYPES, EnumType, LogoLaunchScreenCLIParam, NoneType
 
 
@@ -67,25 +66,11 @@ def is_enum_member(value: str, enum_class: Enum) -> TypeGuard[EnumType]:  # type
         raise ValueError(f"Invalid enum member: {value}") from e
 
 
-def flag_to_enum(flag: tuple[str, bool], enum_class: EnumType) -> EnumType:  # type: ignore # noqa: RET503  # it will raise an error if not a member
+def flag_to_enum(flag: tuple[str, bool], enum_class: EnumType) -> EnumType:  # type: ignore # it will raise an error if not a member
     """Converts a flag tuple to an enum class."""
     if is_enum_member(flag[0], enum_class):
         return enum_class.__members__[flag[0].upper()]  # type: ignore
-
-
-def process_models(
-    model: MadIconModel, *, process_launch_screens: bool = True, process_icons: bool = True
-) -> defaultdict[str, list[Resolution]]:
-    """Processes the PWA models and generates the necessary files."""
-    data = defaultdict[str, list[Resolution]](list)
-    if process_launch_screens:
-        devices = model.apple.devices
-        data["launch_screens"] = list({res.actual_resolution for res in devices})
-    if process_icons:
-        data["touch_icon_sizes"] = model.apple.icon_sizes
-        data["macos_icon_sizes"] = model.apple.macos_icon_sizes
-        data["ms_tile_icon_sizes"] = model.mstile.sizes
-    return data
+    return None
 
 
 def data_path() -> Path:
@@ -132,7 +117,7 @@ def retrieve_model(path: Path | BufferedReader | None = None) -> MadIconModel:
             path = data_path()
         content: io.BytesIO = load_file(path)
         content.seek(0)  # Reset the pointer to the beginning of the file
-        return get_pwa_model(content.getvalue())
+        return get_mad_model(content.getvalue())
     except ValidationError as e:
         print(f"Error: Validation error in JSON file {path}.")
         raise typer.Exit(code=1) from e
@@ -145,6 +130,5 @@ __all__ = [
     "load_file",
     "make_dirs",
     "parse_launch_options",
-    "process_models",
     "retrieve_model",
 ]

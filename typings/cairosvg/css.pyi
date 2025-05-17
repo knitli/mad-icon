@@ -9,11 +9,9 @@ Handle CSS stylesheets.
 
 def find_stylesheets(tree):  # -> Generator[list[Any], Any, None]:
     """Find the stylesheets included in ``tree``."""
-    ...
 
 def find_stylesheets_rules(tree, stylesheet_rules, url):  # -> Generator[Any, Any, None]:
     """Find the rules in a stylesheet."""
-    ...
 
 def parse_declarations(input):  # -> tuple[list[Any], list[Any]]:
     ...
@@ -24,8 +22,6 @@ def parse_stylesheets(tree, url):  # -> tuple[Matcher, Matcher]:
     for normal and !important declarations.
 
     """
-    ...
 
 def get_declarations(rule):  # -> Generator[tuple[Any, LiteralString, Any], Any, None]:
     """Get the declarations in ``rule``."""
-    ...

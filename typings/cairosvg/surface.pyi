@@ -75,7 +75,6 @@ class Surface:
         parameters are keyword-only.
 
         """
-        ...
 
     def __init__(
         self,
@@ -102,12 +101,10 @@ class Surface:
         actually written.
 
         """
-        ...
 
     @property
     def points_per_pixel(self):
         """Surface resolution."""
-        ...
 
     @property
     def device_units_per_user_units(self):
@@ -117,25 +114,20 @@ class Surface:
         PNG. User units are pixels.
 
         """
-        ...
 
     def set_context_size(self, width, height, viewbox, tree):  # -> None:
         """Set the Cairo context size, set the SVG viewport size."""
-        ...
 
     def finish(self):  # -> None:
         """Read the surface content."""
-        ...
 
     def map_color(
         self, string, opacity=...
     ):  # -> tuple[Literal[0], Literal[0], Literal[0], Literal[0]] | tuple[float, float, float, int] | tuple[float, float, float, float] | tuple[*tuple[float, ...], int] | tuple[Literal[0], Literal[0], Literal[0], Literal[1]]:
         """Parse a color ``string`` and apply ``map_rgba`` function to it."""
-        ...
 
     def draw(self, node):
         """Draw ``node`` and its children."""
-        ...
 
 class PDFSurface(Surface):
     """A surface that writes in PDF format."""
@@ -150,7 +142,6 @@ class PSSurface(Surface):
 class EPSSurface(Surface):
     """A surface that writes in Encapsulated PostScript format."""
 
-    ...
 
 class PNGSurface(Surface):
     """A surface that writes in PNG format."""
@@ -158,7 +149,6 @@ class PNGSurface(Surface):
     device_units_per_user_units = ...
     def finish(self):  # -> None:
         """Read the PNG surface content."""
-        ...
 
 class SVGSurface(Surface):
     """A surface that writes in SVG format.

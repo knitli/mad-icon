@@ -9,6 +9,5 @@ Command-line interface to CairoSVG.
 
 def main(argv=..., stdout=..., stdin=...):  # -> None:
     """Entry-point of the executable."""
-    ...
 
 if __name__ == "__main__": ...

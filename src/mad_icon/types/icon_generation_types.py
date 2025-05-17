@@ -9,13 +9,15 @@ Externally, the `get_flag_config` function brings all this typing goodness toget
 Licensed under the [Plain Apache License](https://plainlicense.org/licenses/permissive/apache-2-0/).
 """
 
+import dataclasses
+
 from enum import StrEnum
 from pathlib import Path
 from typing import TypedDict
 
 import typer
 
-from mad_icon.models import Resolution
+from mad_icon.models import MadIconModel, Resolution
 
 
 type IconSizesType = list[int]
@@ -60,6 +62,10 @@ class IconDescriptiveName(StrEnum):
     MANIFEST = "Manifest Json"
     MS_TILES = "MS Tiles"
 
+    def __str__(self) -> str:
+        """Returns the string representation of the enum value."""
+        return self.value
+
 
 class IconSourceKey(StrEnum):
     """The key for the source image used to generate the icon."""
@@ -70,6 +76,10 @@ class IconSourceKey(StrEnum):
     DARK = "dark"
     TINTED = "tinted"
     TILE_RECTANGLE = "tile-rectangle"
+
+    def __str__(self) -> str:
+        """Returns the string representation of the enum value."""
+        return self.value
 
     @classmethod
     def from_flag(cls, name: str) -> "IconSourceKey":
@@ -116,6 +126,10 @@ class IconSizeGroup(StrEnum):
     MASKED = "android.masked_icon_sizes"
     MS_TILES = "mstile.sizes"
 
+    def __str__(self) -> str:
+        """Returns the string representation of the enum value."""
+        return self.value
+
 
 class ManifestPurpose(StrEnum):
     """
@@ -132,6 +146,10 @@ class ManifestPurpose(StrEnum):
     MONOCHROME = "monochrome"
     ANY = "any"
     NOT_MANIFESTED = "not_manifested"
+
+    def __str__(self) -> str:
+        """Returns the string representation of the enum value."""
+        return self.value
 
 
 class IconGenerationFlag(StrEnum):
@@ -287,6 +305,19 @@ class IconGenerationFlag(StrEnum):
                 return ManifestPurpose.NOT_MANIFESTED
 
     @classmethod
+    def get_all_flags(cls) -> tuple["IconGenerationFlag", ...]:
+        """Returns all icon generation flags."""
+        return tuple(cls.__members__.values())
+
+    @classmethod
+    def from_value(cls, value: str) -> "IconGenerationFlag":
+        """Converts a string to the corresponding enum member."""
+        try:
+            return cls(value)
+        except ValueError as e:
+            raise ValueError(f"Invalid flag: {value}, not a member of {cls.__name__}") from e
+
+    @classmethod
     def from_string(cls, flag: str) -> "IconGenerationFlag":
         """Converts a string to the corresponding enum member."""
         try:
@@ -305,9 +336,11 @@ class IconGenerationConfig(TypedDict, total=False):
         source_key (IconSourceKey): The source key for the icon.
         subdir (str): Subdirectory name for the icon.
         model_attr (IconSizeGroup): The model attribute for icon sizes.
-        ManifestPurpose (ManifestPurpose): Purpose attribute for the manifest.
+        purpose (ManifestPurpose): Purpose attribute for the manifest.
         needs_desat (bool): Whether desaturation is needed.
-        needs_opaque (bool): Whether an opaque background is needed
+        needs_opaque (bool): Whether an opaque background is needed.
+        needs_trans (bool): Whether transparency is needed.
+        needs_clip (bool): Whether clipping is needed.
 
     """
 
@@ -319,7 +352,7 @@ class IconGenerationConfig(TypedDict, total=False):
     source_key: IconSourceKey | None
     model_attr: IconSizeGroup | None
     purpose: ManifestPurpose | tuple[ManifestPurpose, ManifestPurpose] | None
-    # ProcessingRequirements: ProcessingRequirements
+    # these arguments are ProcessingRequirements typed
     needs_desat: bool | None
     needs_opaque: bool | None
     needs_trans: bool | None
@@ -372,9 +405,25 @@ class ProcessedIconKwargs(TypedDict, total=False):
     sizes: IconSizeData | None
 
 
+@dataclasses.dataclass
+class IconGenerationContext:
+    """Holds the state and configuration for the icon generation process."""
+
+    mad_model: MadIconModel
+    source_images: dict[IconSourceKey, tuple[bytes, str]]  # data, type ('svg'/'raster')
+    output_paths: dict[str, Path]
+    active_configs: list[IconGenerationConfig]
+    html_destination: Path
+    destination_dir: Path
+    icon_name_prefix: str
+    generate_html: bool
+    generate_manifest: bool
+
+
 __all__ = [
     "IconDescriptiveName",
     "IconGenerationConfig",
+    "IconGenerationContext",  # Added
     "IconGenerationFlag",
     "IconSizeData",
     "IconSizeGroup",

@@ -9,12 +9,9 @@ Text drawers.
 
 def path_length(path):  # -> Literal[0]:
     """Get the length of ``path``."""
-    ...
 
 def point_following_path(path, width):  # -> tuple[Any, Any] | None:
     """Get the point at ``width`` distance on ``path``."""
-    ...
 
 def text(surface, node, draw_as_text=...):
     """Draw a text ``node``."""
-    ...

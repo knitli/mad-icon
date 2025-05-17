@@ -102,7 +102,7 @@ class Resolution:
     @classmethod
     def from_number_pair(cls, number_pair: str | tuple[int, int]) -> Self:
         """Creates a Resolution object from a number pair string, like '1024x1366' or '1024:1366'."""
-        if isinstance(number_pair, (tuple, list)) and len(number_pair) == 2:
+        if isinstance(number_pair, tuple | list) and len(number_pair) == 2:
             return cls(*number_pair)
         if cls._is_valid_number_pair(number_pair):
             number_pair = number_pair.replace(" ", "")

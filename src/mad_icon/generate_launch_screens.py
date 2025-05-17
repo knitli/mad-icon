@@ -12,11 +12,10 @@ from typing import IO, Annotated  # Use Union for clarity with multiple types
 
 import typer
 
-from mad_icon.types.types import LogoLaunchScreenCLIParam
+from mad_icon.types import LogoLaunchScreenCLIParam
 from mad_icon.utilities import data_path, parse_launch_options
 
 
-# Assuming FileBinaryRead is IO[bytes] or similar based on previous context
 FileBinaryRead = typer.FileBinaryRead
 
 
@@ -24,7 +23,7 @@ app = typer.Typer()
 cwd = Path.cwd()
 
 
-@app.command("generate-launch-screens")
+@app.command("generate-launch-screens", help="[red]NOT YET IMPLEMENTED[/]")
 def generate_launch_screens(
     colored_logo: Annotated[
         LogoLaunchScreenCLIParam | None,
@@ -133,7 +132,7 @@ def generate_launch_screens(
     # Placeholder for actual launch screen generation logic
     print("Generating launch screens...")
     print(f"Colored Logo: {colored_logo}")
-    print(f"Launch Screen Image: {launch_screen_image.name if launch_screen_image else 'None'}")
+    print(f"Launch Screen Image: {launch_screen_image.name if launch_screen_image else "None"}")
     # ... print other args ...
     print(f"Screen Destination Dir: {screen_destination_dir}")
     print(f"Generate Dark Mode: {generate_darkmode}")
@@ -150,7 +149,7 @@ def generate_launch_screens(
             actual_json_path_obj = default_path.open("rb")
 
         print(
-            f"Using JSON data from: {actual_json_path_obj.name if hasattr(actual_json_path_obj, 'name') else actual_json_path_obj}"
+            f"Using JSON data from: {actual_json_path_obj.name if hasattr(actual_json_path_obj, "name") else actual_json_path_obj}"
         )
         # --- Add logic to read/process actual_json_path_obj ---
 

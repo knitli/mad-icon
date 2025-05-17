@@ -20,8 +20,6 @@ def color(
     See http://www.w3.org/TR/SVG/types.html#DataTypeColor
 
     """
-    ...
 
 def negate_color(rgba_tuple):  # -> tuple[Any, Any, Any, Any]:
     """Replace ``rgba_tuple`` with its complementary color."""
-    ...

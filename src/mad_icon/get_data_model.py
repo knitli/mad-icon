@@ -10,7 +10,7 @@ If you would rather have the data model as a JSON file, use the [`get-data`](get
 Licensed under the [Plain Apache License](https://plainlicense.org/licenses/permissive/apache-2-0/).
 """
 
-from mad_icon.models import MadIconModel, get_pwa_model
+from mad_icon.models import MadIconModel, get_mad_model
 from mad_icon.utilities import data_path, load_file
 
 
@@ -30,6 +30,6 @@ def get_data_model() -> MadIconModel:
     data = load_file(data_path())
     try:
         content = data.read()  # Read bytes from BufferedReader
-        return get_pwa_model(content)
+        return get_mad_model(content)
     finally:
         data.close()  # Ensure file is closed

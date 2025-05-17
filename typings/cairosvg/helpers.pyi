@@ -14,11 +14,9 @@ RECT = ...
 class PointError(Exception):
     """Exception raised when parsing a point fails."""
 
-    ...
 
 def distance(x1, y1, x2, y2):
     """Get the distance between two points."""
-    ...
 
 def paint(value):  # -> tuple[None, None] | tuple[str | None, str | Any | None]:
     """Extract from value an uri and a color.
@@ -26,7 +24,6 @@ def paint(value):  # -> tuple[None, None] | tuple[str | None, str | Any | None]:
     See http://www.w3.org/TR/SVG/painting.html#SpecifyingPaint
 
     """
-    ...
 
 def node_format(
     surface, node, reference=...
@@ -37,39 +34,31 @@ def node_format(
     percentages.
 
     """
-    ...
 
 def normalize(string):  # -> str:
     """Normalize a string corresponding to an array of various values."""
-    ...
 
 def point(surface, string):  # -> tuple[float | Any | Literal[0], float | Any | Literal[0], Any]:
     """Return ``(x, y, trailing_text)`` from ``string``."""
-    ...
 
 def point_angle(cx, cy, px, py):  # -> float:
     """Return angle between x axis and point knowing given center."""
-    ...
 
 def preserve_ratio(
     surface, node, width=..., height=...
 ):  # -> tuple[Any | float | int, Any | float | int, float | Any | int, float | Any | int]:
     """Manage the ratio preservation."""
-    ...
 
 def clip_marker_box(
     surface, node, scale_x, scale_y
 ):  # -> tuple[Any | float, Any | float, Any, Any]:
     """Get the clip ``(x, y, width, height)`` of the marker box."""
-    ...
 
 def quadratic_points(x1, y1, x2, y2, x3, y3):  # -> tuple[Any, Any, Any, Any, Any, Any]:
     """Return the quadratic points to create quadratic curves."""
-    ...
 
 def rotate(x, y, angle):  # -> tuple[Any, Any]:
     """Rotate a point of an angle around the origin point."""
-    ...
 
 def transform(surface, transform_string, gradient=..., transform_origin=...):  # -> None:
     """Transform ``surface`` or ``gradient`` if supplied using ``string``.
@@ -77,19 +66,15 @@ def transform(surface, transform_string, gradient=..., transform_origin=...):  #
     See http://www.w3.org/TR/SVG/coords.html#TransformAttribute
 
     """
-    ...
 
 def clip_rect(string):  # -> list[str] | Any:
     """Parse the rect value of a clip."""
-    ...
 
 def rotations(node):  # -> list[float] | list[Any]:
     """Retrieves the original rotations of a `text` or `tspan` node."""
-    ...
 
 def pop_rotation(node, original_rotate, rotate):  # -> None:
     """Removes the rotations of a node that are already used."""
-    ...
 
 def zip_letters(
     xl, yl, dxl, dyl, rl, word
@@ -103,11 +88,9 @@ def zip_letters(
     avoid setting an x,y or rotation value that have already been used.
 
     """
-    ...
 
 def flatten(node):  # -> str:
     """Flatten the text of a node and its children."""
-    ...
 
 def size(surface, string, reference=...):  # -> float | Literal[0]:
     """Replace a ``string`` with units by a float value.
@@ -119,4 +102,3 @@ def size(surface, string, reference=...):  # -> float | Literal[0]:
     reference.
 
     """
-    ...

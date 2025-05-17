@@ -8,9 +8,9 @@ from mad_icon.models.models import (
     AppleDevice,
     AppleModel,
     DeviceType,
-    MsTileModel,
     MadIconModel,
-    get_pwa_model,
+    MsTileModel,
+    get_mad_model,
 )
 from mad_icon.models.resolution import Resolution
 
@@ -23,5 +23,5 @@ __all__ = [
     "MsTileModel",
     "MadIconModel",
     "Resolution",
-    "get_pwa_model",
+    "get_mad_model",
 ]

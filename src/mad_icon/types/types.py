@@ -17,7 +17,7 @@ from typing_extensions import TypeVar
 
 NoneType = None.__class__
 
-NONE_TYPES: tuple[Any, Any, Any] = (None, NoneType, Literal[None])  # noqa: PYI061
+NONE_TYPES: tuple[Any, Any, Any] = (None, NoneType, Literal[None])
 
 EnumType = TypeVar("EnumType", bound=Enum)
 

@@ -9,4 +9,3 @@ Root tag drawer.
 
 def svg(surface, node):  # -> None:
     """Draw a svg ``node``."""
-    ...

@@ -11,18 +11,27 @@ Licensed under the [Plain Apache License](https://plainlicense.org/licenses/perm
 import io
 import json
 
-from collections.abc import Sequence
+from collections.abc import Sequence  # Add Sequence, IO, remove TYPE_CHECKING
 from pathlib import Path
-from typing import Any, TypeGuard, cast
+from typing import IO, Any, TypeGuard
 
 import typer
 
 from PIL import Image
 
-from mad_icon.models import MadIconModel, Resolution, get_pwa_model
-from mad_icon.types import IconGenerationConfig, IconGenerationFlag, get_flag_config
+from mad_icon.models import Resolution  # Remove MadIconModel import again
+from mad_icon.types import (  # Reformatted import
+    IconGenerationConfig,
+    IconGenerationContext,  # Keep IconGenerationContext for type hint
+    IconGenerationFlag,
+    IconSizeGroup,  # Keep IconSizeGroup as it's used
+    IconSourceKey,
+    get_flag_config,
+)
+
+# Removed duplicate Resolution import from here
 from mad_icon.utilities import (
-    analyze_svg_structure,
+    # analyze_svg_structure, # To be removed from this file's scope
     check_masked_padding,
     create_macos_clipped_svg,
     desaturate_image,
@@ -32,7 +41,6 @@ from mad_icon.utilities import (
     make_dirs,
     render_svg_to_png_bytes,
     resize_image,
-    retrieve_model,
 )
 
 
@@ -67,7 +75,7 @@ def get_flag_configs(kwargs: dict[str, Any]) -> dict[str, IconGenerationConfig]:
     Get the flag configurations for icon generation.
 
     Args:
-        icon: The icon object from the PWA model.
+        icon: The icon object from the Mad Model.
         kwargs: The keyword arguments containing the flags.
 
     Returns:
@@ -87,7 +95,7 @@ def process_imaginary_icon_kwargs(kwargs: dict[str, Any]) -> None:
     pass  # TODO: Placeholder for the actual implementation
 
 
-def process_icon_kwargs(kwargs: dict[str, Any]):
+def process_icon_kwargs(kwargs: dict[str, Any]) -> None:
     """
     Process the keyword arguments for icon generation.
     """
@@ -181,6 +189,7 @@ def prepare_output_directories(config: dict[str, Any]) -> dict[str, Path]:
     else:
         return output_paths
 
+
 def load_icon_image(icon_image_arg: FileBinaryRead) -> tuple[bytes, str, str, "Image.Image | None"]:
     """
     Load the icon image and determine its type.
@@ -216,7 +225,7 @@ def load_icon_image(icon_image_arg: FileBinaryRead) -> tuple[bytes, str, str, "I
             typer.echo(f"Input icon is Raster ({width}x{height}): {image_name}")
     except Exception as e:
         typer.echo(
-            f"Error loading input icon '{getattr(icon_image_arg, 'name', 'unknown')}': {e}",
+            f"Error loading input icon '{getattr(icon_image_arg, "name", "unknown")}': {e}",
             err=True,
         )
         raise typer.Exit(code=1) from e
@@ -300,7 +309,7 @@ def check_masked_image_padding(image_data: bytes | None, image_name: str, *, is_
     """
     if not image_data:
         typer.echo(
-            f"Warning: Could not obtain data for masked padding check (source: '{image_name or 'Fallback'}').",
+            f"Warning: Could not obtain data for masked padding check (source: '{image_name or "Fallback"}').",
             err=True,
         )
         return
@@ -405,125 +414,127 @@ def read_source_from_arg(file_arg: Any, category: str) -> tuple[bytes | None, st
         return data, image_type
 
 
-def get_source_images_from_args(
-    cli_args: dict[str, Any], source_data: dict[str, bytes | None], source_type: dict[str, str]
-) -> None:
-    """
-    Extract source images from CLI arguments and populate source dictionaries.
-
-    Args:
-        cli_args: Dictionary containing all relevant CLI arguments.
-        source_data: Dictionary to populate with image data.
-        source_type: Dictionary to populate with image types.
-    """
-    # Map of CLI argument keys to category names
-    arg_to_category = {
-        "masked_image": "masked",
-        "masked_image_monochrome": "monochrome",
-        "darkmode_image": "dark",
-        "tinted_image": "tinted",
-        "tile_rectangle_image": "tile_rect",
-    }
-
-    # Get explicit sources if provided
-    for arg_key, category in arg_to_category.items():
-        file_arg = cli_args.get(arg_key)
-        data, image_type = read_source_from_arg(file_arg, category)
-        if data:
-            source_data[category] = data
-            source_type[category] = image_type
-
-
-def perform_svg_analysis(
-    cli_args: dict[str, Any], source_data: dict[str, bytes | None], source_type: dict[str, str]
-) -> None:
-    """
-    Perform experimental SVG analysis if enabled.
-
-    Args:
-        cli_args: Dictionary containing CLI arguments.
-        source_data: Dictionary containing image data.
-        source_type: Dictionary containing image types.
-    """
-    if not cli_args.get("attempt_svg_analysis"):
-        return
-
-    typer.echo("  Info: [Experimental] Attempting SVG analysis...")
-
-    # Analyze dark mode SVG
-    if source_type["dark"] == "svg" and source_data["dark"]:
-        try:
-            analysis_result = analyze_svg_structure(source_data["dark"])
-            if analysis_result.get("background_found"):
-                typer.echo(
-                    "  Info: SVG analysis suggests background found for dark mode. (Modification logic TBD)"
-                )
-                # TODO: Implement SVG modification logic here if analysis is successful
-        except Exception as e:
-            typer.echo(f"  Warning: SVG analysis for dark mode failed: {e}", err=True)
-
-    # Analyze tinted mode SVG
-    if source_type["tinted"] == "svg" and source_data["tinted"]:
-        try:
-            analysis_result = analyze_svg_structure(source_data["tinted"])
-            if analysis_result.get("background_found"):
-                typer.echo(
-                    "  Info: SVG analysis suggests background found for tinted mode. (Modification logic TBD)"
-                )
-                # TODO: Implement SVG modification logic here
-        except Exception as e:
-            typer.echo(f"  Warning: SVG analysis for tinted mode failed: {e}", err=True)
+# Removed get_source_images_from_args and perform_svg_analysis as per plan
 
 
 def determine_source_images(
-    cli_args: dict[str, Any], base_icon_data: bytes, base_icon_type: str
-) -> tuple[dict[str, bytes | None], dict[str, str]]:
+    base_icon_data: bytes,
+    base_icon_type: str,
+    masked_icon_arg: FileBinaryRead | None,
+    monochrome_icon_arg: FileBinaryRead | None,
+    dark_icon_arg: FileBinaryRead | None,
+    tinted_icon_arg: FileBinaryRead | None,
+    tile_rect_icon_arg: FileBinaryRead | None,
+    # attempt_svg_analysis: bool, # Removed for now
+) -> dict[IconSourceKey, tuple[bytes, str]]:
     """
     Determines the definitive source image data (bytes) and type ('svg'/'raster')
-    for each icon category by applying fallback logic and reading optional inputs.
+    for each icon category by applying fallback logic based on IconSourceKey enum
+    and reading optional CLI arguments.
 
     Args:
-        cli_args: Dictionary containing all relevant CLI arguments (FileBinaryRead, flags).
         base_icon_data: The loaded bytes of the primary icon image.
         base_icon_type: The type ('svg' or 'raster') of the primary icon image.
+        masked_icon_arg: Optional CLI arg for masked icon.
+        monochrome_icon_arg: Optional CLI arg for monochrome icon.
+        dark_icon_arg: Optional CLI arg for dark mode icon.
+        tinted_icon_arg: Optional CLI arg for tinted icon.
+        tile_rect_icon_arg: Optional CLI arg for tile rectangle icon.
 
     Returns:
-        A tuple of two dictionaries:
-        - source_data: Mapping category key (e.g., "masked") to bytes or None.
-        - source_type: Mapping category key to 'svg'/'raster' or empty string.
+        A dictionary mapping IconSourceKey enums to a tuple of (image_data, image_type).
     """
     typer.echo("Determining source images...")
 
-    # Initialize source data and type dictionaries
-    source_data: dict[str, bytes | None] = {
-        "base": base_icon_data,
-        "masked": None,
-        "monochrome": None,
-        "dark": None,
-        "tinted": None,
-        "tile_rect": None,
-    }
-    source_type: dict[str, str] = {
-        "base": base_icon_type,
-        "masked": "",
-        "monochrome": "",
-        "dark": "",
-        "tinted": "",
-        "tile_rect": "",
+    # Store explicitly provided sources keyed by IconSourceKey
+    explicit_sources: dict[IconSourceKey, tuple[bytes, str]] = {}
+    arg_map = {
+        IconSourceKey.MASKED: ("masked", masked_icon_arg),
+        IconSourceKey.MONOCHROME: ("monochrome", monochrome_icon_arg),
+        IconSourceKey.DARK: ("dark", dark_icon_arg),
+        IconSourceKey.TINTED: ("tinted", tinted_icon_arg),
+        IconSourceKey.TILE_RECTANGLE: ("tile_rect", tile_rect_icon_arg),
     }
 
-    # Step 1: Extract source images from CLI arguments
-    get_source_images_from_args(cli_args, source_data, source_type)
+    for key, (category_name, file_arg) in arg_map.items():
+        data, image_type = read_source_from_arg(file_arg, category_name)
+        if data:
+            explicit_sources[key] = (data, image_type)
 
-    # Step 2: Apply fallback logic for missing sources
-    # TODO: Use fallback logic from model
+    # Final dictionary to hold resolved sources
+    source_images: dict[IconSourceKey, tuple[bytes, str]] = {
+        IconSourceKey.BASE: (base_icon_data, base_icon_type)
+    }
 
-    # Step 3: Perform experimental SVG analysis if enabled
-    perform_svg_analysis(cli_args, source_data, source_type)
+    # Apply fallback logic for required keys
+    keys_to_resolve = [
+        IconSourceKey.MASKED,
+        IconSourceKey.MONOCHROME,
+        IconSourceKey.DARK,
+        IconSourceKey.TINTED,
+        IconSourceKey.TILE_RECTANGLE,
+    ]
 
-    # Note: Typer is responsible for closing the FileBinaryRead arguments
+    for current_key in keys_to_resolve:
+        if current_key in explicit_sources:
+            source_images[current_key] = explicit_sources[current_key]
+            typer.echo(f"  Using explicit source for: {current_key.name}")
+            continue
+
+        # Start fallback chain
+        fallback_key = current_key
+        found_source = False
+        visited_keys = {current_key}  # Prevent infinite loops
+
+        while True:
+            fallback_key = fallback_key.fallback_strategy
+            if fallback_key in visited_keys:
+                typer.echo(
+                    f"  Warning: Fallback loop detected for {current_key.name}. Stopping.", err=True
+                )
+                break  # Avoid infinite loop
+            visited_keys.add(fallback_key)
+
+            # Check explicit sources first for the fallback key
+            if fallback_key in explicit_sources:
+                source_images[current_key] = explicit_sources[fallback_key]
+                typer.echo(
+                    f"  Using fallback '{fallback_key.name}' (explicit) for: {current_key.name}"
+                )
+                found_source = True
+                break
+            # Check already resolved sources (including BASE)
+            elif fallback_key in source_images:
+                source_images[current_key] = source_images[fallback_key]
+                typer.echo(
+                    f"  Using fallback '{fallback_key.name}' (resolved) for: {current_key.name}"
+                )
+                found_source = True
+                break
+            # If fallback is BASE or MASKED and we haven't found it, something is wrong
+            # (BASE should always be in source_images initially)
+            elif (
+                fallback_key in (IconSourceKey.BASE, IconSourceKey.MASKED)
+                and fallback_key not in source_images
+            ):
+                # This case should ideally not happen if BASE is always added
+                typer.echo(
+                    f"  Warning: Ultimate fallback '{fallback_key.name}' not found for {current_key.name}. Skipping.",
+                    err=True,
+                )
+                break
+
+        if not found_source and current_key not in source_images:
+            typer.echo(
+                f"  Warning: Could not determine source image for {current_key.name} after fallback.",
+                err=True,
+            )
+
+    # Step 3: Perform experimental SVG analysis if enabled (Removed for now)
+    # perform_svg_analysis(cli_args, source_data, source_type)
+
     typer.echo("Source image determination complete.")
-    return source_data, source_type
+    return source_images
 
 
 def sequence_or_string_guard(
@@ -538,75 +549,12 @@ def sequence_or_string_guard(
     # Validate the retrieved value is a sequence
     if not isinstance(value, Sequence) or isinstance(value, str):
         raise TypeError(
-            f"Expected a sequence for model attribute '{attr or 'unknown'}', got {type(value).__name__}"
+            f"Expected a sequence for model attribute '{attr or "unknown"}', got {type(value).__name__}"
         )
     return True
 
 
-def get_target_sizes(
-    pwa_model: MadIconModel, model_attr: str, cat_name: str
-) -> list[tuple[int, int]] | None:
-    """
-    Extract target sizes from the PWA model for a specific category.
-
-    Args:
-        pwa_model: The loaded PWA data model.
-        model_attr: The attribute path to access sizes in the model.
-        cat_name: The category name for logging purposes.
-
-    Returns:
-        A list of (width, height) tuples or None if sizes cannot be determined.
-    """
-    try:
-        # Navigate to the specified attribute in the model
-        sizes_or_resolutions = pwa_model
-        for attr in model_attr.split("."):
-            sizes_or_resolutions = getattr(sizes_or_resolutions, attr)
-
-        sequence_or_string_guard(sizes_or_resolutions, model_attr)
-
-        # Check if the sequence is empty
-        if not sizes_or_resolutions:
-            typer.echo(
-                f"  Info: No sizes defined for {cat_name} in model attribute '{model_attr}'. Skipping.",
-                err=False,
-            )
-            return None
-
-        # Cast to the expected type for type checking
-        typed_sizes_or_resolutions = cast(
-            "Sequence[int | tuple[int, int] | Resolution]", sizes_or_resolutions
-        )
-
-        # Convert all size formats to (width, height) tuples
-        target_sizes: list[tuple[int, int]] = []
-        for item in typed_sizes_or_resolutions:
-            if isinstance(item, tuple) and len(item) == 2:
-                target_sizes.append(item)  # item is tuple[int, int]
-            elif isinstance(item, Resolution):
-                target_sizes.append((item.width, item.height))  # item is Resolution
-            else:
-                # Handle the integer case (square dimensions)
-                target_sizes.append((item, item))  # item is int
-
-        # Check if we successfully extracted any sizes
-        if not target_sizes:
-            typer.echo(
-                f"  Warning: No valid sizes could be processed for {cat_name} from model attribute '{model_attr}'. Skipping.",
-                err=True,
-            )
-            return None
-    except (AttributeError, TypeError, ValueError) as e:
-        typer.echo(
-            f"  Warning: Error retrieving/processing sizes for {cat_name} from model attribute '{model_attr}': {e}. Skipping category.",
-            err=True,
-        )
-        return None
-    else:
-        return target_sizes
-
-
-def has_value(value: Any) -> bool:
+def has_value(value: Any) -> TypeGuard[object]:
     """Validate that the value is not None or empty."""
     if value:
         return True
@@ -638,7 +586,8 @@ def process_macos_clipped_icon(
             temp_svg = create_macos_clipped_svg(svg_data, None, width, height)
         else:  # Raster source or None
             raster_img = load_file(io.BytesIO(source_data))
-            temp_svg = create_macos_clipped_svg(None, raster_img, width, height)
+            image = get_image_from_buffer(raster_img, size_formatted)
+            temp_svg = create_macos_clipped_svg(None, image, width, height)
 
         has_value(temp_svg)
         png_bytes = render_svg_to_png_bytes(temp_svg, width, height)
@@ -701,31 +650,6 @@ def process_raster_icon(
         return None
     else:
         return img  # type: ignore
-
-
-def apply_post_processing(
-    img: Image.Image, *, needs_desat: bool, needs_opaque: bool, needs_trans: bool
-) -> Image.Image:
-    """
-    Apply post-processing effects to an image.
-
-    Args:
-        img: The image to process.
-        needs_desat: Whether to desaturate the image.
-        needs_opaque: Whether to ensure an opaque background.
-        needs_trans: Whether to ensure a transparent background.
-
-    Returns:
-        The processed image.
-    """
-    if needs_desat:
-        img = desaturate_image(img)  # type: ignore
-    if needs_opaque:
-        # TODO: Make background color configurable? Default white.
-        img = ensure_opaque_background(img, "white")  # type: ignore
-    elif needs_trans:
-        img = ensure_transparent_background(img)  # type: ignore
-    return img  # type: ignore
 
 
 def get_relative_path(
@@ -806,39 +730,8 @@ def generate_manifest_entry(
     return None
 
 
-def extract_category_params(
-    category_config: dict[str, Any],
-) -> tuple[str, str, str, str, bool, bool, bool, bool, str]:
-    """
-    Extract and return the parameters from a category configuration.
-
-    Args:
-        category_config: Dict defining the category configuration.
-
-    Returns:
-        A tuple containing the extracted parameters:
-        (cat_name, src_key, subdir, model_attr, needs_desat, needs_opaque, needs_trans, needs_clip, manifest_purp)
-    """
-    return (
-        category_config["name"],
-        category_config["source_key"],
-        category_config["subdir"],
-        category_config["model_attr"],
-        category_config["needs_desat"],
-        category_config["needs_opaque"],
-        category_config["needs_trans"],
-        category_config["needs_clip"],
-        category_config["manifest_purp"],
-    )
-
-
 def setup_output_paths(
-    base_icon_path: Path,
-    subdir: str,
-    html_destination: Path,
-    destination_dir: Path,
-    icon_name: str,
-    cat_name: str,
+    base_icon_path: Path, subdir: str, destination_dir: Path, icon_name: str, cat_name: str
 ) -> tuple[Path, Path, str]:
     """
     Set up output paths and filename prefix for icon generation.
@@ -846,7 +739,6 @@ def setup_output_paths(
     Args:
         base_icon_path: The base path for icon output.
         subdir: The subdirectory for this category, if any.
-        html_destination: The HTML destination path.
         destination_dir: The main destination directory.
         icon_name: The base name for the icon files.
         cat_name: The category name.
@@ -862,7 +754,7 @@ def setup_output_paths(
     icon_name_prefix = (
         icon_name
         if cat_name == "Apple Touch"
-        else f"{icon_name}-{cat_name.lower().replace(' ', '-')}"
+        else f"{icon_name}-{cat_name.lower().replace(" ", "-")}"
     )
 
     return output_dir, destination_dir_parent, icon_name_prefix
@@ -935,13 +827,14 @@ def process_single_icon(
         return None, None
 
     try:
-        # Apply post-processing effects
-        processed_img = apply_post_processing(
-            processed_img,
-            needs_desat=needs_desat,
-            needs_opaque=needs_opaque,
-            needs_trans=needs_trans,
-        )
+        # Inline post-processing logic
+        if needs_desat:
+            processed_img = desaturate_image(processed_img)  # type: ignore
+        if needs_opaque:
+            # TODO: Make background color configurable? Default white.
+            processed_img = ensure_opaque_background(processed_img, "white")  # type: ignore
+        elif needs_trans:
+            processed_img = ensure_transparent_background(processed_img)  # type: ignore
 
         # Save the processed image
         processed_img.save(output_path, "PNG")
@@ -970,26 +863,17 @@ def process_single_icon(
 
 
 def process_icon_category(
-    category_config: dict[str, Any],
-    pwa_model: MadIconModel,
-    source_data: dict[str, bytes | None],
-    source_type: dict[str, str],
-    output_paths: dict[str, Path],
-    cli_config: dict[str, Any],
+    context: IconGenerationContext, config: IconGenerationConfig
 ) -> tuple[list[str], list[dict[str, Any]]]:
     """
-    Generates all icons for a single category based on the provided configuration.
+    Generates all icons for a single category based on the provided context and config.
 
     Handles retrieving sizes, processing images (SVG/raster, clipping, effects),
     saving files, and generating metadata entries.
 
     Args:
-        category_config: Dict defining the category (name, source_key, subdir, etc.).
-        pwa_model: The loaded PWA data model.
-        source_data: Dict mapping source keys to image data (bytes).
-        source_type: Dict mapping source keys to image type ('svg'/'raster').
-        output_paths: Dict mapping logical path names to Path objects.
-        cli_config: Dict containing general CLI config (icon_name, html_destination, etc.).
+        context: The shared IconGenerationContext.
+        config: The IconGenerationConfig for the specific category being processed.
 
     Returns:
         A tuple containing two lists: (html_tags, manifest_icons) for this category.
@@ -999,76 +883,113 @@ def process_icon_category(
         TypeError: If model data for sizes is incorrect.
         AttributeError: If model attribute path is incorrect.
     """
-    # Extract configuration parameters
-    (
-        cat_name,
-        src_key,
-        subdir,
-        model_attr,
-        needs_desat,
-        needs_opaque,
-        needs_trans,
-        needs_clip,
-        manifest_purp,
-    ) = extract_category_params(category_config)
+    # Extract needed info directly from config and context
+    # Use .get() with defaults for potentially missing keys in TypedDict
+    cat_name = config.get("name", "Unknown Category")
+    src_key = config.get(
+        "source_key"
+    )  # Use .get() as it might be None for non-icon flags (though we check is_icon_flag earlier)
+    subdir = config.get("subdir", "")
+    model_attr_group = config.get("model_attr")  # IconSizeGroup or None
+    needs_desat = config.get("needs_desat", False)
+    needs_opaque = config.get("needs_opaque", False)
+    needs_trans = config.get("needs_trans", False)
+    needs_clip = config.get("needs_clip", False)
+    manifest_purp = config.get("purpose", "any")  # Default to 'any' if not specified
+
+    # Ensure manifest_purp is a string (handle tuple case for MONOCHROME)
+    # Fix typo: Use manifest_purp here
+    if isinstance(manifest_purp, tuple):
+        manifest_purp_str = " ".join(manifest_purp)
+    else:
+        manifest_purp_str = str(manifest_purp)  # Convert enum member or None to string
 
     html_tags: list[str] = []
     manifest_icons: list[dict[str, Any]] = []
 
-    # Validate source data
-    current_source_data = source_data.get(src_key)
-    current_source_type = source_type.get(src_key)
+    # Get target sizes directly from the model via context
+    target_resolutions: list[Resolution] = []
+    if model_attr_group:
+        try:
+            if model_attr_group == IconSizeGroup.APPLE_TOUCH:
+                target_resolutions = context.mad_model.apple.icon_sizes
+            elif model_attr_group == IconSizeGroup.MACOS:
+                target_resolutions = context.mad_model.apple.macos_icon_sizes
+            elif model_attr_group == IconSizeGroup.MASKED:
+                target_resolutions = context.mad_model.android.masked_icon_sizes
+            elif model_attr_group == IconSizeGroup.MS_TILES:
+                target_resolutions = context.mad_model.mstile.sizes
 
-    if not current_source_data:
+            if not target_resolutions:
+                typer.echo(
+                    f"  Info: No sizes defined for {cat_name} in model attribute '{model_attr_group}'. Skipping.",
+                    err=False,
+                )
+                return html_tags, manifest_icons
+        except (AttributeError, TypeError, ValueError) as e:
+            typer.echo(
+                f"  Warning: Error retrieving/processing sizes for {cat_name} from model attribute '{model_attr_group}': {e}. Skipping category.",
+                err=True,
+            )
+            return html_tags, manifest_icons
+    else:
+        # This case should ideally only happen for non-icon flags, already skipped in generate_icons.py
         typer.echo(
-            f"  Warning: Source data for '{cat_name}' (key: {src_key}) not found. Skipping category.",
+            f"  Warning: No model attribute defined for category '{cat_name}'. Skipping.", err=True
+        )
+        return html_tags, manifest_icons
+
+    # Get the correct source image data and type based on the source_key
+    if not src_key or src_key not in context.source_images:
+        typer.echo(
+            f"  Warning: Source image data not found for key '{src_key}' in category '{cat_name}'. Skipping category.",
             err=True,
         )
-        return html_tags, manifest_icons  # Return empty lists
+        return html_tags, manifest_icons
+    current_source_data, current_source_type = context.source_images[src_key]
 
-    # Get target sizes from the model
-    target_sizes = get_target_sizes(pwa_model, model_attr, cat_name)
-    if not target_sizes:
-        return html_tags, manifest_icons  # Return empty lists if no sizes
+    # Setup output paths and filename prefix using context
+    # Assuming 'base_icon_path' is reliably set in context.output_paths by prepare_output_directories
+    base_icon_path = context.output_paths.get("base_icon_path")
+    if not base_icon_path:
+        typer.echo("  Error: 'base_icon_path' not found in output paths. Cannot proceed.", err=True)
+        # Or raise an error, as this indicates a setup problem
+        return html_tags, manifest_icons
 
-    # Set up output paths
-    icon_name = cli_config.get("icon_name", "icon")  # Default name if not in config
+    destination_dir = context.destination_dir
+    html_destination = context.html_destination
+    icon_name = context.icon_name_prefix
+
     output_dir, destination_dir_parent, icon_name_prefix = setup_output_paths(
-        output_paths["base_icon_path"],
-        subdir,
-        output_paths["html_dest_path"],
-        output_paths["destination_dir"],
-        icon_name,
-        cat_name,
+        base_icon_path, subdir, destination_dir, icon_name, cat_name
     )
 
     # Process each size
-    for width, height in target_sizes:
+    for resolution in target_resolutions:
+        width, height = resolution.width, resolution.height
         try:
             html_tag, manifest_entry = process_single_icon(
-                width,
-                height,
-                output_dir,
-                icon_name_prefix,
-                current_source_data,
-                current_source_type,
-                output_paths["html_dest_path"],
-                destination_dir_parent,
-                cat_name,
-                manifest_purp,
-                needs_clip=needs_clip,
-                needs_desat=needs_desat,
-                needs_opaque=needs_opaque,
-                needs_trans=needs_trans,
+                width=width,
+                height=height,
+                output_dir=output_dir,
+                icon_name_prefix=icon_name_prefix,
+                current_source_data=current_source_data,
+                current_source_type=current_source_type,
+                html_destination=html_destination,
+                destination_dir_parent=destination_dir_parent,
+                cat_name=cat_name,
+                manifest_purp=manifest_purp_str,  # Pass the string version
+                needs_clip=bool(needs_clip),  # Ensure boolean
+                needs_desat=bool(needs_desat),  # Ensure boolean
+                needs_opaque=bool(needs_opaque),  # Ensure boolean
+                needs_trans=bool(needs_trans),  # Ensure boolean
             )
-
             if html_tag:
                 html_tags.append(html_tag)
             if manifest_entry:
                 manifest_icons.append(manifest_entry)
-
         except Exception as e:
-            # Catch-all for unexpected errors
+            # Catch-all for unexpected errors during processing a single size
             typer.echo(
                 f"    Unexpected error processing size {width}x{height} for {cat_name}: {e}",
                 err=True,
@@ -1081,22 +1002,26 @@ def process_icon_category(
 def generate_output_files(
     html_tags: list[str],
     manifest_icons: list[dict[str, Any]],
-    output_paths: dict[str, Path],
-    cli_config: dict[str, Any],
+    context: IconGenerationContext,  # Use context object
+    # output_paths: dict[str, Path], # Removed
+    # cli_config: dict[str, Any], # Removed
 ) -> None:
     """
-    Writes the aggregated HTML tags and manifest icon entries to output files.
+    Writes the aggregated HTML tags and manifest icon entries to output files,
+    using information from the IconGenerationContext.
 
     Args:
         html_tags: List of generated HTML tag strings.
         manifest_icons: List of generated manifest icon dictionaries.
-        output_paths: Dictionary mapping logical path names to Path objects.
-        cli_config: Dictionary containing CLI config (filenames, generation flags).
+        context: The shared IconGenerationContext containing output paths and flags.
     """
-    generate_html = cli_config.get("generate_html")
-    generate_manifest = cli_config.get("generate_manifest")
-    html_destination = output_paths["html_dest_path"]
-    html_file_name = cli_config.get("html_file_name", "paste-content-in-site-head-tags.html")
+    # Retrieve necessary info from context
+    generate_html = context.generate_html
+    generate_manifest = context.generate_manifest
+    html_destination = context.html_destination
+    # Use a default filename if not specified (though Typer usually provides one)
+    # Assuming html_file_name exists on context, otherwise need to add it or get differently
+    html_file_name = getattr(context, "html_file_name", "paste-content-in-site-head-tags.html")
     if generate_html:
         typer.echo("Generating HTML snippet...")
         if html_tags:
@@ -1140,51 +1065,39 @@ def generate_output_files(
             typer.echo("  No Manifest icons generated.")
 
 
-def cleanup_resources(cli_args: dict[str, Any], opened_json_file: io.IOBase | None) -> None:
+def cleanup_resources(
+    files_to_close: Sequence[IO[bytes] | None], opened_json_file: IO[bytes] | None
+) -> None:  # Use Sequence[IO[bytes] | None]
     """
-    Closes all file handles that were passed as Typer arguments or opened internally.
+    Closes all file handles passed in the list and the optional opened JSON file.
 
     Args:
-        cli_args: Dictionary containing all CLI arguments (including FileBinaryRead).
-        opened_json_file: The file handle returned by _load_mad_model (if any).
+        files_to_close: A list of file-like objects (e.g., from Typer arguments).
+        opened_json_file: The file handle returned by retrieve_model (if any).
     """
     typer.echo("Cleaning up resources...")
 
-    # List of keys corresponding to FileBinaryRead arguments in cli_args
-    file_arg_keys = [
-        "icon_image",
-        "masked_image",
-        "masked_image_monochrome",
-        "darkmode_image",
-        "tinted_image",
-        "tile_rectangle_image",
-        "json_path",  # User-provided JSON path arg
-    ]
-
-    for key in file_arg_keys:
-        file_arg = cli_args.get(key)
-        # Check if it's an IOBase instance and if it's not already closed
-        if file_arg and isinstance(file_arg, io.IOBase) and not file_arg.closed:
+    for file_arg in files_to_close:
+        # Check if file_arg is not None and not closed (isinstance check removed)
+        if file_arg and not file_arg.closed:
             try:
                 file_arg.close()
-                # typer.echo(f"  Closed file argument: {getattr(file_arg, 'name', key)}") # Optional debug echo
+                # typer.echo(f"  Closed file argument: {getattr(file_arg, 'name', 'unknown')}") # Optional debug echo
             except Exception as e:
                 # Log error but don't stop cleanup
                 typer.echo(
-                    f"  Warning: Error closing file argument '{getattr(file_arg, 'name', key)}': {e}",
+                    f"  Warning: Error closing file argument '{getattr(file_arg, "name", "unknown")}': {e}",
                     err=True,
                 )
 
-    # Close the file handle returned by _load_mad_model (could be default data or user json)
-    # This might be redundant if json_path was provided AND Typer closes it,
-    # but ensures closure if retrieve_model opened the default one.
+    # Close the file handle potentially opened by retrieve_model
     if opened_json_file and not opened_json_file.closed:
         try:
             opened_json_file.close()
-            # typer.echo(f"  Closed PWA model file: {getattr(opened_json_file, 'name', 'default data')}") # Optional debug echo
+            # typer.echo(f"  Closed Mad Model file: {getattr(opened_json_file, 'name', 'default data')}") # Optional debug echo
         except Exception as e:
             typer.echo(
-                f"  Warning: Error closing PWA model file '{getattr(opened_json_file, 'name', 'unknown')}': {e}",
+                f"  Warning: Error closing Mad Model file '{getattr(opened_json_file, "name", "unknown")}': {e}",
                 err=True,
             )
 
@@ -1192,21 +1105,16 @@ def cleanup_resources(cli_args: dict[str, Any], opened_json_file: io.IOBase | No
 
 
 __all__ = [
-    "apply_post_processing",
     "check_masked_image_padding",
     "cleanup_resources",
     "determine_source_images",
-    "extract_category_params",
     "generate_html_tag",
     "generate_manifest_entry",
     "generate_output_files",
     "get_masked_image_data",
     "get_relative_path",
-    "get_source_images_from_args",
-    "get_target_sizes",
     "has_value",
     "load_icon_image",
-    "perform_svg_analysis",
     "prepare_output_directories",
     "process_icon_category",
     "process_icon_kwargs",
